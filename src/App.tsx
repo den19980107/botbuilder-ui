@@ -1,16 +1,16 @@
 import React from 'react';
 import PrivateRoutes from './Routes';
 import { Redirect, Route, Router, Switch } from 'react-router-dom';
-import { secureStroge } from './utils/storage';
 import history from './history'
 // import pages
 import LoginPage from './pages/login'
 import RegisterPage from './pages/register'
+import auth from './utils/auth';
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    secureStroge.get("user")
+    auth.checkAuth()
       ? <Component {...props} />
       : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
   )} />

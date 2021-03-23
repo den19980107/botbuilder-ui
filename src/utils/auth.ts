@@ -3,6 +3,8 @@ import { message } from 'antd';
 import clientConfig from '../config/client.json'
 import history from "../history";
 import { secureStroge } from './storage';
+import decode from 'jwt-decode';
+import User from "../types/user";
 const API_URL = `${clientConfig.API_URL}/auth/`;
 
 const register = (username, password) => {
@@ -24,8 +26,8 @@ const login = (username, password) => {
             password,
         })
         .then((response) => {
-            if (response.data.accessToken) {
-                secureStroge.set("user", JSON.stringify(response.data));
+            if (response.data.token) {
+                secureStroge.set("token", JSON.stringify(response.data.token));
                 history.push("/")
             }
         })
@@ -40,13 +42,43 @@ const logout = () => {
     history.push("/login")
 };
 
-const getCurrentUser = () => {
-    return JSON.parse(secureStroge.get("user"));
+const getCurrentUser = (): User => {
+    const token = secureStroge.get("token");
+    const user = decode<JWT_TOKEN>(token);
+    return user
 };
+
+interface JWT_TOKEN {
+    id: string,
+    name: string;
+    exp: number;
+}
+
+const checkAuth = () => {
+    const token = secureStroge.get("token");
+    if (!token) {
+        console.error("no token!")
+        return false;
+    }
+
+    try {
+        const { exp } = decode<JWT_TOKEN>(token);
+        if (exp < new Date().getTime()) {
+            console.error("token expire!")
+            return false
+        }
+    } catch (e) {
+        console.error(e)
+        return false
+    }
+
+    return true
+}
 
 export default {
     register,
     login,
     logout,
     getCurrentUser,
+    checkAuth
 };
