@@ -9,6 +9,17 @@ import NotFoundPage from './pages/notfound';
 
 export default function Routes() {
     return (
+
+        // TODO 將頁面改為 container 作法
+        // <Layout style={{ minHeight: '100vh' }}>
+        //     <BackTop />
+        //     <SliderContainer />
+        //     <Layout>
+        //         <HeaderContainer />
+        //         <ContentContainer />
+        //         <FooterContainer />
+        //     </Layout>
+        // </Layout>
         <Layout>
             <NavBar />
             <Layout>

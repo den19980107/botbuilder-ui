@@ -27,13 +27,13 @@ const login = (username, password) => {
         })
         .then((response) => {
             if (response.data.token) {
-                secureStroge.set("token", JSON.stringify(response.data.token));
+                secureStroge.set("token", response.data.token);
                 history.push("/")
             }
         })
         .catch((err) => {
-            console.log(err.response)
-            message.error(err.response.data.msg)
+            console.log(err)
+            message.error(err)
         })
 };
 
@@ -47,6 +47,10 @@ const getCurrentUser = (): User => {
     const user = decode<JWT_TOKEN>(token);
     return user
 };
+
+const getToken = (): string => {
+    return secureStroge.get("token");
+}
 
 interface JWT_TOKEN {
     id: string,
@@ -80,5 +84,6 @@ export default {
     login,
     logout,
     getCurrentUser,
+    getToken,
     checkAuth
 };
