@@ -1,5 +1,5 @@
 import React from 'react';
-import PrivateRoutes from './Routes';
+import PrivateRoutes from './container/index'
 import { Redirect, Route, Router, Switch } from 'react-router-dom';
 import history from './history'
 // react query

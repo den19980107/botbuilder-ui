@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useQuery } from 'react-query';
+import React from 'react'
 import { useUserBots } from '../../api/user';
 import BotList from '../../components/BotList';
 

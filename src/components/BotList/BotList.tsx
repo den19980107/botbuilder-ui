@@ -1,4 +1,4 @@
-import { Button, message, Table } from 'antd';
+import { message, Table } from 'antd';
 import React, { useState } from 'react'
 import { useQueryClient } from 'react-query';
 import { useCreateBot, useDeleteBot } from '../../api/bot';
@@ -52,7 +52,7 @@ const BotList: React.FC<BotListProps> = ({ bots }) => {
     ];
     return (
         <div>
-            <h1>bots</h1>
+            <h1>機器人列表</h1>
             <Table dataSource={bots} columns={columns} rowKey="_id" />
         </div>
     );

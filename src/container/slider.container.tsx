@@ -1,17 +1,21 @@
+import { RobotOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
+import Sider from 'antd/lib/layout/Sider';
 import React from 'react'
-import { Layout, Menu } from 'antd'
-import { AppstoreOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom'
-const { Sider } = Layout
+import { Link } from 'react-router-dom';
 
-export default function NavBar() {
+interface SliderContainerProps {
+
+}
+
+const SliderContainer: React.FC<SliderContainerProps> = ({ }) => {
     return (
         <Sider theme="light" collapsible>
             <h1 style={{ padding: "1rem" }}>Logo</h1>
             <Menu theme="light" mode="inline">
-                <Menu.Item icon={<AppstoreOutlined />} key="home">
+                <Menu.Item icon={<RobotOutlined />} key="home">
                     <Link to="/">
-                        <span>home</span>
+                        <span>機器人清單</span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item icon={<AppstoreOutlined />} key="page1">
@@ -31,5 +35,7 @@ export default function NavBar() {
                 </Menu.Item>
             </Menu>
         </Sider>
-    )
+    );
 }
+
+export default SliderContainer;
