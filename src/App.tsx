@@ -6,8 +6,8 @@ import history from './history'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 // import pages
-import LoginPage from './pages/login'
-import RegisterPage from './pages/register'
+import { LoginPage } from './pages/login'
+import { RegisterPage } from './pages/register'
 import auth from './utils/auth';
 
 const queryClient = new QueryClient()

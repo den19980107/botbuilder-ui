@@ -8,7 +8,7 @@ interface BotListProps {
     bots: Array<Bot>
 }
 
-const BotList: React.FC<BotListProps> = ({ bots }) => {
+export const BotList: React.FC<BotListProps> = ({ bots }) => {
     const queryClient = useQueryClient();
     const [botName, setBotName] = useState<string>("");
     const [script, setScript] = useState<string>("");
@@ -57,5 +57,3 @@ const BotList: React.FC<BotListProps> = ({ bots }) => {
         </div>
     );
 }
-
-export default BotList;
