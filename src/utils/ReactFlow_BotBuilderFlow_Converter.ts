@@ -41,10 +41,9 @@ export const reactFlowToBotBuilderFlow = (elements: Elements<any>): SCRIPT => {
             nodePool[edge.source].next_node_id = edge.target
         }
     }
-
     for (let i = 0; i < inputIds.length; i++) {
         const flow: FLOW = {}
-        let next_node_Id: string | null = inputIds[0]
+        let next_node_Id: string | null = inputIds[i]
 
         while (next_node_Id) {
             let node = nodePool[next_node_Id]
