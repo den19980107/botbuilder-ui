@@ -5,6 +5,13 @@ import { FlowElementsContext } from './flowElementsContext';
 import { SideBar } from './sideBar'
 import { createEdgeId } from './util/createId';
 
+// import custom node
+import { ConditionNode } from './customNodes/conditionNode'
+
+const nodeTypes = {
+    condition: ConditionNode,
+};
+
 interface ReactFlowContainerProps {
 
 }
@@ -89,6 +96,7 @@ export const ReactFlowContainer: React.FC<ReactFlowContainerProps> = ({ }) => {
                     onLoad={onLoad}
                     onDrop={onDrop}
                     onDragOver={onDragOver}
+                    nodeTypes={nodeTypes}
                     snapToGrid={true}
                     key="edges"
                 >

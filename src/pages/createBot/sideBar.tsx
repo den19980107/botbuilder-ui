@@ -44,6 +44,10 @@ export const SideBar: React.FC<SideBarProps> = ({ }) => {
                     responseData: `{"message":"ok!"}`,
                 }
                 break;
+            case NodeType.CONDITION:
+                dragElement.data.payload = {
+                    condition: "#FLOW_SHARE_VARIABLE.Something"
+                }
         }
         setCurrentDragElement(dragElement)
         event.dataTransfer.effectAllowed = 'move';
@@ -51,6 +55,9 @@ export const SideBar: React.FC<SideBarProps> = ({ }) => {
 
     return (
         <aside>
+            <Button onDragStart={(event) => onDragStart(event, 'condition', NodeType.CONDITION)} draggable>
+                Condition
+            </Button>
             <Button onDragStart={(event) => onDragStart(event, 'input', NodeType.WEB_HOOK)} draggable>
                 WebHook
             </Button>

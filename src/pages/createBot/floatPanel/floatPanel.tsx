@@ -7,6 +7,7 @@ import { FetchDataFloatPannelLayout } from './layout/fetchData.FloatPannelLayout
 import { HttpResponseFloatPannelLayout } from './layout/httpResponse.FloatPannelLayout'
 import { FlowElement, removeElements } from 'react-flow-renderer'
 import { message } from 'antd'
+import { ConditionFloatPannelLayout } from './layout/condition.FloatPannelLayout'
 
 interface FloatPanelProps {
     visiable: boolean,
@@ -42,6 +43,9 @@ export const FloatPanel: React.FC<FloatPanelProps> = ({ visiable, data, type, no
                 break;
             case NodeType.HTTP_RESPONSE:
                 return <HttpResponseFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete} />
+                break;
+            case NodeType.CONDITION:
+                return <ConditionFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete} />
                 break;
         }
     }
