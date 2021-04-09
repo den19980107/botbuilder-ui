@@ -1,8 +1,10 @@
 import { message } from "antd";
 import axios, { AxiosError } from "axios"
-import { UseMutateFunction, useMutation, UseMutationOptions, useQueryClient } from "react-query";
+import { UseMutateFunction, useMutation, UseMutationOptions, useQuery, useQueryClient, UseQueryOptions } from "react-query";
 import config from '../config/client.json'
+import Bot from "../types/bot";
 import auth from '../utils/auth';
+import queryKeys from "./queryKeys";
 
 const token = auth.getToken();
 
@@ -12,12 +14,12 @@ const axiosConfig = {
 
 export interface CreateBotInput {
     name: string,
-    script: string
+    nodes: string
 }
 
 const useCreateBot = (option: UseMutationOptions<any, AxiosError, CreateBotInput, unknown>): UseMutateFunction<any, AxiosError, CreateBotInput, unknown> => {
     const createBot = async (botData: CreateBotInput) => {
-        if (!botData.name || !botData.script) return message.error("bot name or data cant not be empty")
+        if (!botData.name || !botData.nodes) return message.error("bot name or data cant not be empty")
         try {
             await axios.post(`${config.API_URL}/bot/create`, botData, axiosConfig)
         } catch (e) {
@@ -48,7 +50,45 @@ const useDeleteBot = (option: UseMutationOptions<any, AxiosError, DeleteBotInput
     return mutate
 }
 
+
+export interface UpdateBotInput {
+    name: string,
+    nodes: string,
+    botId: string,
+}
+
+const useUpdateBot = (option: UseMutationOptions<any, AxiosError, UpdateBotInput, unknown>): UseMutateFunction<any, AxiosError, UpdateBotInput, unknown> => {
+    const updateBot = async (botData: UpdateBotInput) => {
+        if (!botData.name || !botData.nodes) return message.error("bot name or data cant not be empty")
+        try {
+            await axios.post(`${config.API_URL}/bot/update/${botData.botId}`, botData, axiosConfig)
+        } catch (e) {
+            throw e
+        }
+    }
+
+    const { mutate } = useMutation(updateBot, option);
+    return mutate
+}
+
+const useBotData = (botId: string, options?: UseQueryOptions<Bot, AxiosError>) => {
+
+    const getBot = async (): Promise<Bot> => {
+        try {
+            const { data } = await axios.get(`${config.API_URL}/bot/${botId}`, axiosConfig);
+            return data
+        } catch (error) {
+            console.error(error)
+            throw error
+        }
+    }
+
+    return useQuery<Bot, AxiosError>(queryKeys.bot.BOT, getBot, options)
+}
+
 export {
     useCreateBot,
-    useDeleteBot
+    useDeleteBot,
+    useUpdateBot,
+    useBotData
 }
