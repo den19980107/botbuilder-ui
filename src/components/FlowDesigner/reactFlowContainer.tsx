@@ -41,7 +41,19 @@ export const ReactFlowContainer: React.FC<ReactFlowContainerProps> = ({ }) => {
         event.dataTransfer.dropEffect = 'move';
     };
 
-    const onNodeDragStop = (event, node) => console.log('drag stop', node);
+    /**
+     * 當節點拖動結束時 更新節點 state 位置
+     * @param event 
+     * @param node 
+     */
+    const onNodeDragStop = (event, node) => {
+        setElements(elements => elements.map(el => {
+            if (el.id === node.id) {
+                el = node
+            }
+            return el;
+        }))
+    }
     const onElementClick = (event, element) => {
         setShowFloatPanel(true)
         setCurrentSelectElement(element)

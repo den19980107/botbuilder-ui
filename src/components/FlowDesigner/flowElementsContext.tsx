@@ -3,11 +3,11 @@ import { Elements, FlowElement, Node } from 'react-flow-renderer'
 
 interface flowElementContext {
     currentDragElement: Node | null,
-    setCurrentDragElement: (e: Node | null) => void,
+    setCurrentDragElement: React.Dispatch<React.SetStateAction<Node | null>>,
     currentSelectElement: Node | null,
-    setCurrentSelectElement: (e: Node | null) => void,
+    setCurrentSelectElement: React.Dispatch<React.SetStateAction<Node | null>>,
     elements: Array<FlowElement>,
-    setElements: (e: Elements<any>) => void
+    setElements: React.Dispatch<React.SetStateAction<Elements<any>>>
 }
 
 export const FlowElementsContext = createContext<flowElementContext>({
