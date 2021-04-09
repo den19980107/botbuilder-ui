@@ -2,11 +2,14 @@ import { message, Table } from 'antd';
 import React, { useState } from 'react'
 import { useQueryClient } from 'react-query';
 import { useCreateBot, useDeleteBot } from '../../api/bot';
+import queryKeys from '../../api/queryKeys';
+import history from '../../history';
 import Bot from '../../types/bot';
 
 interface BotListProps {
     bots: Array<Bot>
 }
+
 
 export const BotList: React.FC<BotListProps> = ({ bots }) => {
     const queryClient = useQueryClient();
@@ -15,7 +18,7 @@ export const BotList: React.FC<BotListProps> = ({ bots }) => {
 
     const createBotMutation = useCreateBot({
         onSuccess: () => {
-            queryClient.invalidateQueries("bots")
+            queryClient.invalidateQueries(queryKeys.user.BOTS)
             message.success("新增成功！")
             setBotName("");
             setScript("");
@@ -24,7 +27,7 @@ export const BotList: React.FC<BotListProps> = ({ bots }) => {
 
     const deleteBotMutation = useDeleteBot({
         onSuccess: () => {
-            queryClient.invalidateQueries("bots")
+            queryClient.invalidateQueries(queryKeys.user.BOTS)
             message.success("刪除成功！")
         }
     })
@@ -42,11 +45,19 @@ export const BotList: React.FC<BotListProps> = ({ bots }) => {
             key: 'name',
         },
         {
-            title: 'Action',
+            title: '',
             dataIndex: '',
             key: 'x',
             render: (record) => {
-                return <a onClick={() => deleteBotMutation({ botId: record._id })}>delete</a>
+                return <a onClick={() => deleteBotMutation({ botId: record._id })}>刪除</a>
+            },
+        },
+        {
+            title: '',
+            dataIndex: '',
+            key: 'edit',
+            render: (record) => {
+                return <a onClick={() => history.push(`/bot/update/${record._id}`)}>編輯</a>
             },
         },
     ];

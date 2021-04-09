@@ -3,6 +3,7 @@ import { useQuery, UseQueryOptions } from "react-query";
 import config from '../config/client.json'
 import Bot from "../types/bot";
 import auth from '../utils/auth';
+import queryKeys from "./queryKeys";
 
 const token = auth.getToken();
 
@@ -21,7 +22,7 @@ const useUserBots = (options?: UseQueryOptions<Bot[], AxiosError>) => {
         }
     }
 
-    return useQuery<Bot[], AxiosError>("bots", getUsersBots, options)
+    return useQuery<Bot[], AxiosError>(queryKeys.user.BOTS, getUsersBots, options)
 }
 
 
