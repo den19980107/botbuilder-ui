@@ -4,69 +4,88 @@ import NodeType from '../../constant/nodeType.constants'
 import { FlowElement } from 'react-flow-renderer';
 import { FlowElementsContext } from './flowElementsContext';
 import { createNodeId } from './util/createId'
+
+interface node {
+    name: string,
+    nodeType: NodeType,
+    reactFlowNodeType: string,
+    payload: any
+}
+const Nodes: node[] = [
+    {
+        name: "Condition",
+        nodeType: NodeType.CONDITION,
+        reactFlowNodeType: "condition",
+        payload: {
+            condition: "#FLOW_SHARE_VARIABLE.Something"
+        }
+    },
+    {
+        name: "WebHook",
+        nodeType: NodeType.WEB_HOOK,
+        reactFlowNodeType: "input",
+        payload: {
+            route: "",
+            method: "GET",
+            storeBodyAt: "DATA"
+        }
+    },
+    {
+        name: "Fetch Data",
+        nodeType: NodeType.FETCH_DATA,
+        reactFlowNodeType: "default",
+        payload: {
+            url: "",
+            method: "GET",
+            body: "",
+            header: "",
+            storeDataAt: "DATA"
+        }
+    },
+    {
+        name: "Http Response",
+        nodeType: NodeType.HTTP_RESPONSE,
+        reactFlowNodeType: "output",
+        payload: {
+            statusCode: 200,
+            responseData: `{"message":"ok!"}`,
+        }
+    }
+]
+
 interface SideBarProps {
 
 }
 
 export const SideBar: React.FC<SideBarProps> = ({ }) => {
     const { setCurrentDragElement } = useContext(FlowElementsContext)
-    const onDragStart = (event, ReactFlowNodeType, type) => {
+    const onDragStart = (event, ReactFlowNodeType, type, payload) => {
         const dragElement: FlowElement = {
             id: createNodeId(),
             type: ReactFlowNodeType,
             position: { x: 0, y: 0 },
             data: {
                 type,
-                label: `${type}`
+                label: `${type}`,
+                payload
             }
         };
-
-        switch (type) {
-            case NodeType.WEB_HOOK:
-                dragElement.data.payload = {
-                    route: "",
-                    method: "GET",
-                    storeBodyAt: "DATA"
-                }
-                break;
-            case NodeType.FETCH_DATA:
-                dragElement.data.payload = {
-                    url: "",
-                    method: "GET",
-                    body: "",
-                    header: "",
-                    storeDataAt: "DATA"
-                }
-                break;
-            case NodeType.HTTP_RESPONSE:
-                dragElement.data.payload = {
-                    statusCode: 200,
-                    responseData: `{"message":"ok!"}`,
-                }
-                break;
-            case NodeType.CONDITION:
-                dragElement.data.payload = {
-                    condition: "#FLOW_SHARE_VARIABLE.Something"
-                }
-        }
         setCurrentDragElement(dragElement)
         event.dataTransfer.effectAllowed = 'move';
     };
 
     return (
-        <aside>
-            <Button onDragStart={(event) => onDragStart(event, 'condition', NodeType.CONDITION)} draggable>
-                Condition
-            </Button>
-            <Button onDragStart={(event) => onDragStart(event, 'input', NodeType.WEB_HOOK)} draggable>
-                WebHook
-            </Button>
-            <Button onDragStart={(event) => onDragStart(event, 'default', NodeType.FETCH_DATA)} draggable>
-                Fetch Data
-            </Button>
-            <Button onDragStart={(event) => onDragStart(event, 'output', NodeType.HTTP_RESPONSE)} draggable>
-                HTTP Response
-            </Button>
+        <aside style={{ background: "rgb(247,247,247)", padding: "1rem", height: "100%" }}>
+            {
+                Nodes.map(node => {
+                    console.log(node.payload)
+                    return (
+                        <Button style={{ width: "100%", marginBottom: "1rem" }} onDragStart={(event) => onDragStart(event, node.reactFlowNodeType, node.nodeType, node.payload)} draggable>
+                            {node.name}
+                        </Button>
+                    )
+                })
+            }
         </aside>
     );
 }
