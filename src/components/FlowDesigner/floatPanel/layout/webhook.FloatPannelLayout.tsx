@@ -1,6 +1,7 @@
 import React from 'react'
 import HttpMethod from '../../../../constant/httpMethod.constants'
 import { Form, Input, Button, Select, message } from 'antd';
+import auth from '../../../../utils/auth';
 const { Option } = Select;
 
 interface WebhookPayload {
@@ -27,12 +28,19 @@ export const WebhookFloatPannelLayout: React.FC<WebhookFloatPannelLayoutProps> =
             onFinish={onFinish}
         >
             <Form.Item
+                style={{ display: "none" }}
+                name="userId"
+                initialValue={auth.getCurrentUser().name}
+            >
+                <Input disabled></Input>
+            </Form.Item>
+            <Form.Item
                 label="webhook url"
                 name="route"
                 rules={[{ required: true, message: 'Please input webhook url!' }]}
                 initialValue={payload.route}
             >
-                <Input placeholder={`請輸入 webhook url 並以 "/" 作為開頭`} />
+                <Input addonBefore={`/${auth.getCurrentUser().name}/`} placeholder={`請輸入 webhook url 並以 "/" 作為開頭`} />
             </Form.Item>
 
             <Form.Item
