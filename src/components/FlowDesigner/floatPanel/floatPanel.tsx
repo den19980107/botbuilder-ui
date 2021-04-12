@@ -51,7 +51,7 @@ export const FloatPanel: React.FC<FloatPanelProps> = ({ visiable, data, type, no
     }
 
     return (
-        <div style={{ zIndex: 100, width: "300px", position: "absolute", left: 0, top: 0, padding: "1rem", background: "#fff", display: visiable ? "block" : "none", border: "0.5px solid #ccc", borderRadius: "1rem" }}>
+        <div style={{ zIndex: 100, width: "500px", position: "absolute", left: 0, top: 0, padding: "1rem", background: "#fff", display: visiable ? "block" : "none", border: "0.5px solid #ccc", borderRadius: "1rem" }}>
             <h1 style={{ marginBottom: "2rem" }}>{type} 設定</h1>
             {switchLayout(data)}
         </div>

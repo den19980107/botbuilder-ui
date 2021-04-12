@@ -1,3 +1,4 @@
+import { PlusOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import React from 'react'
 import { useUserBots } from '../../api/user'
@@ -22,7 +23,10 @@ export const HomePage: React.FC<HomePageProps> = ({ }) => {
     if (data) {
         return (
             <div>
-                <Button onClick={() => history.push("/bot/create")}>建立</Button>
+                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>
+                    <h1>機器人列表</h1>
+                    <Button type="primary" icon={<PlusOutlined />} onClick={() => history.push("/bot/create")}>建立</Button>
+                </div>
                 <BotList bots={data}></BotList>
             </div>
         );
