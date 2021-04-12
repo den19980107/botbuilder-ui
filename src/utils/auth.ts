@@ -38,7 +38,7 @@ const login = (username, password) => {
 };
 
 const logout = () => {
-    secureStroge.remove("user");
+    secureStroge.remove("token");
     history.push("/login")
 };
 
