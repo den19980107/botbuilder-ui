@@ -1,4 +1,4 @@
-import { RobotOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { RobotOutlined, AppstoreOutlined, DatabaseOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
 import React from 'react'
@@ -18,9 +18,9 @@ const SliderContainer: React.FC<SliderContainerProps> = ({ }) => {
                         <span>機器人清單</span>
                     </Link>
                 </Menu.Item>
-                <Menu.Item icon={<AppstoreOutlined />} key="page1">
-                    <Link to="/page1">
-                        <span>page1</span>
+                <Menu.Item icon={<DatabaseOutlined />} key="database">
+                    <Link to="/database">
+                        <span>資料表</span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item icon={<AppstoreOutlined />} key="page2">
