@@ -83,7 +83,7 @@ const useBotData = (botId: string, options?: UseQueryOptions<Bot, AxiosError>) =
         }
     }
 
-    return useQuery<Bot, AxiosError>(queryKeys.bot.BOT, getBot, options)
+    return useQuery<Bot, AxiosError>([queryKeys.bot.BOT, botId], getBot, options)
 }
 
 export {
