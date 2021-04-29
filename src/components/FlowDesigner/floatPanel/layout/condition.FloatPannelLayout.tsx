@@ -1,26 +1,19 @@
 import { Button, Form, Input, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React from 'react'
-import { Constants } from 'botbuilder-share'
+import { Constants, ConditionNodePayload } from 'botbuilder-share'
 const { ConditionOperator } = Constants;
 const { Option } = Select
 
-interface ConditionPayload {
-    condition: string,
-    operator: string,
-    operant: number,
-    true_run_node_id: string,
-    false_run_node_id: string
-}
 
 interface ConditionFloatPannelLayoutProps {
-    payload: ConditionPayload,
-    onChange: (payload: ConditionPayload) => void,
+    payload: ConditionNodePayload,
+    onChange: (payload: ConditionNodePayload) => void,
     onDelete: () => void
 }
 
 export const ConditionFloatPannelLayout: React.FC<ConditionFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
-    const onFinish = (payload: ConditionPayload) => {
+    const onFinish = (payload: ConditionNodePayload) => {
         onChange(payload)
     };
 

@@ -2,23 +2,18 @@ import React from 'react'
 import { Constants } from 'botbuilder-share';
 import { Form, Input, Button, Select, message } from 'antd';
 import auth from '../../../../utils/auth';
+import { WebHookNodePayload } from 'botbuilder-share'
 const { HttpMethods } = Constants
 const { Option } = Select;
 
-interface WebhookPayload {
-    route: string,
-    method: string,
-    storeBodyAt: string
-}
-
 interface WebhookFloatPannelLayoutProps {
-    payload: WebhookPayload,
-    onChange: (payload: WebhookPayload) => void,
+    payload: WebHookNodePayload,
+    onChange: (payload: WebHookNodePayload) => void,
     onDelete: () => void
 }
 
 export const WebhookFloatPannelLayout: React.FC<WebhookFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
-    const onFinish = (payload: WebhookPayload) => {
+    const onFinish = (payload: WebHookNodePayload) => {
         onChange(payload)
     };
 

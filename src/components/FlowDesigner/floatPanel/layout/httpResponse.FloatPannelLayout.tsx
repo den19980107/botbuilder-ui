@@ -1,21 +1,17 @@
 import { Button, Form, Input, Select } from 'antd';
 import React from 'react'
-
+import { HttpResponseNodePayload } from 'botbuilder-share'
 const { Option } = Select
 
-interface HttpResponsePayload {
-    statusCode: number,
-    responseData: any
-}
 
 interface HttpResponseFloatPannelLayoutProps {
-    payload: HttpResponsePayload,
-    onChange: (payload: HttpResponsePayload) => void,
+    payload: HttpResponseNodePayload,
+    onChange: (payload: HttpResponseNodePayload) => void,
     onDelete: () => void
 }
 
 export const HttpResponseFloatPannelLayout: React.FC<HttpResponseFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
-    const onFinish = (payload: HttpResponsePayload) => {
+    const onFinish = (payload: HttpResponseNodePayload) => {
         onChange(payload)
     };
 

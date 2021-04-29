@@ -1,16 +1,12 @@
 import { Button, Form, Input, Select } from 'antd';
 import React, { useState } from 'react'
 import { useAllTableData, useColsDataByTableId } from '../../../../api/database';
+import { InsertRowNodePayload } from 'botbuilder-share'
 const { Option } = Select;
 
-interface InsertRowPayload {
-    tableId: string,
-    data: { [key: string]: any }
-}
-
 interface InsertRowFloatPannelLayoutProps {
-    payload: InsertRowPayload,
-    onChange: (payload: InsertRowPayload) => void,
+    payload: InsertRowNodePayload,
+    onChange: (payload: InsertRowNodePayload) => void,
     onDelete: () => void
 }
 
@@ -48,8 +44,8 @@ export const InsertRowFloatPannelLayout: React.FC<InsertRowFloatPannelLayoutProp
 
 interface DatabaseInsertFormInput {
     tableId: string,
-    payload: InsertRowPayload,
-    onChange: (payload: InsertRowPayload) => void,
+    payload: InsertRowNodePayload,
+    onChange: (payload: InsertRowNodePayload) => void,
     onDelete: () => void
 }
 
@@ -60,7 +56,7 @@ export const DatabaseInsertForm: React.FC<DatabaseInsertFormInput> = ({ payload,
     if (isLoading) return <div>loading ...</div>
 
     const onFinish = (formData) => {
-        const payload: InsertRowPayload = {
+        const payload: InsertRowNodePayload = {
             tableId,
             data: formData
         }

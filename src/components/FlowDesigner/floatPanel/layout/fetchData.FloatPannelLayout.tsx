@@ -1,27 +1,18 @@
 import { Button, Form, Input, Select } from 'antd';
 import React from 'react'
-import { Constants } from 'botbuilder-share';
+import { Constants, FetchDataNodePayload } from 'botbuilder-share';
 const { HttpMethods } = Constants
 const { Option } = Select
 const { TextArea } = Input;
 
-interface FetchDataPayload {
-    url: string,
-    method: string,
-    // TODO body 目前用 textfield 讓 user 自己輸入，未來要改用 ui 的方式讓 user 新增欄位與值
-    body: any,
-    // TODO header 目前用 textfield 讓 user 自己輸入，未來要改用 ui 的方式讓 user 新增欄位與值
-    header: { [keys: string]: string },
-    storeDataAt: string
-}
 interface FetchDataFloatPannelLayoutProps {
-    payload: FetchDataPayload,
-    onChange: (payload: FetchDataPayload) => void,
+    payload: FetchDataNodePayload,
+    onChange: (payload: FetchDataNodePayload) => void,
     onDelete: () => void
 }
 
 export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
-    const onFinish = (payload: FetchDataPayload) => {
+    const onFinish = (payload: FetchDataNodePayload) => {
         onChange(payload)
     };
 
@@ -62,7 +53,7 @@ export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProp
             <Form.Item
                 label="header 內容"
                 name="header"
-                initialValue={payload.header}
+                initialValue={payload.headers}
             >
                 < TextArea />
             </Form.Item>
