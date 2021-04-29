@@ -8,6 +8,7 @@ import { HttpResponseFloatPannelLayout } from './layout/httpResponse.FloatPannel
 import { FlowElement, removeElements } from 'react-flow-renderer'
 import { message } from 'antd'
 import { ConditionFloatPannelLayout } from './layout/condition.FloatPannelLayout'
+import { InsertRowFloatPannelLayout } from './layout/insertRow.FloatPannelLayout'
 
 const { NodeType } = Constants
 interface FloatPanelProps {
@@ -47,6 +48,9 @@ export const FloatPanel: React.FC<FloatPanelProps> = ({ visiable, data, type, no
                 break;
             case NodeType.CONDITION:
                 return <ConditionFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete} />
+                break;
+            case NodeType.INSERT_ROW:
+                return <InsertRowFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete}></InsertRowFloatPannelLayout>
                 break;
         }
     }

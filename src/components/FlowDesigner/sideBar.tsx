@@ -52,6 +52,14 @@ const Nodes: node[] = [
             statusCode: 200,
             responseData: `{"message":"ok!"}`,
         }
+    },
+    {
+        name: "Insert Row",
+        nodeType: NodeType.INSERT_ROW,
+        reactFlowNodeType: "default",
+        payload: {
+
+        }
     }
 ]
 
