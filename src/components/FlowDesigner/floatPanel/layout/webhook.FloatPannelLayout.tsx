@@ -1,12 +1,13 @@
 import React from 'react'
-import HttpMethod from '../../../../constant/httpMethod.constants'
+import { Constants } from 'botbuilder-share';
 import { Form, Input, Button, Select, message } from 'antd';
 import auth from '../../../../utils/auth';
+const { HttpMethods } = Constants
 const { Option } = Select;
 
 interface WebhookPayload {
     route: string,
-    method: HttpMethod,
+    method: string,
     storeBodyAt: string
 }
 
@@ -50,7 +51,7 @@ export const WebhookFloatPannelLayout: React.FC<WebhookFloatPannelLayoutProps> =
                 initialValue={payload.method}
             >
                 <Select  >
-                    {Object.keys(HttpMethod).map((method, key) => <Option value={method} key={key}>{method}</Option>)}
+                    {Object.keys(HttpMethods).map((method, key) => <Option value={method} key={key}>{method}</Option>)}
                 </Select>
             </Form.Item>
 

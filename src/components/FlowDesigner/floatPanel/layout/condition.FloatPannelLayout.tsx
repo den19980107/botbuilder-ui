@@ -1,8 +1,8 @@
 import { Button, Form, Input, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React from 'react'
-import ConditionOpertator from '../../../../constant/conditionOperator.constants';
-
+import { Constants } from 'botbuilder-share'
+const { ConditionOperator } = Constants;
 const { Option } = Select
 
 interface ConditionPayload {
@@ -46,7 +46,7 @@ export const ConditionFloatPannelLayout: React.FC<ConditionFloatPannelLayoutProp
                 initialValue={payload.operator}
             >
                 <Select  >
-                    {Object.keys(ConditionOpertator).map((operator, key) => <Option value={operator} key={key}>{operator}</Option>)}
+                    {Object.keys(ConditionOperator).map((operator, key) => <Option value={operator} key={key}>{operator}</Option>)}
                 </Select>
 
             </Form.Item>

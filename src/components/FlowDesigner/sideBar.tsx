@@ -1,13 +1,15 @@
 import React, { useContext } from 'react'
 import { Button } from 'antd';
-import NodeType from '../../constant/nodeType.constants'
 import { FlowElement } from 'react-flow-renderer';
 import { FlowElementsContext } from './flowElementsContext';
 import { createNodeId } from './util/createId'
 
+import { Constants } from 'botbuilder-share'
+const { NodeType } = Constants;
+
 interface node {
     name: string,
-    nodeType: NodeType,
+    nodeType: string,
     reactFlowNodeType: string,
     payload: any
 }

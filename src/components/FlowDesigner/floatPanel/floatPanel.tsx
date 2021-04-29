@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import NodeType from '../../../constant/nodeType.constants'
+import { Constants } from 'botbuilder-share'
 import { FlowElementsContext } from '../flowElementsContext'
 // layout
 import { WebhookFloatPannelLayout } from './layout/webhook.FloatPannelLayout'
@@ -9,9 +9,10 @@ import { FlowElement, removeElements } from 'react-flow-renderer'
 import { message } from 'antd'
 import { ConditionFloatPannelLayout } from './layout/condition.FloatPannelLayout'
 
+const { NodeType } = Constants
 interface FloatPanelProps {
     visiable: boolean,
-    type: NodeType,
+    type: string,
     data: any,
     nodeId: string
 }

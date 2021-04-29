@@ -1,6 +1,9 @@
 import { Edge, Elements, Node } from "react-flow-renderer";
 import { v4 as uuidv4 } from 'uuid'
-import NodeType from "../constant/nodeType.constants";
+import { Constants } from 'botbuilder-share'
+const { NodeType } = Constants
+
+
 // TODO 之後想辦法整合後端型態
 interface BOTBUILDER_SCRIPT {
     [key: string]: BOTBUILDER_FLOW
