@@ -8,14 +8,14 @@ import { Constants } from 'botbuilder-share'
 const { NodeType } = Constants;
 
 interface node {
-    name: string,
+    label: string,
     nodeType: string,
     reactFlowNodeType: string,
     payload: any
 }
 const Nodes: node[] = [
     {
-        name: "Condition",
+        label: "判斷條件",
         nodeType: NodeType.CONDITION,
         reactFlowNodeType: "condition",
         payload: {
@@ -23,9 +23,9 @@ const Nodes: node[] = [
         }
     },
     {
-        name: "WebHook",
+        label: "建立 API",
         nodeType: NodeType.WEB_HOOK,
-        reactFlowNodeType: "input",
+        reactFlowNodeType: "event",
         payload: {
             route: "",
             method: "GET",
@@ -33,9 +33,9 @@ const Nodes: node[] = [
         }
     },
     {
-        name: "Fetch Data",
+        label: "獲取資料",
         nodeType: NodeType.FETCH_DATA,
-        reactFlowNodeType: "default",
+        reactFlowNodeType: "process",
         payload: {
             url: "",
             method: "GET",
@@ -45,18 +45,26 @@ const Nodes: node[] = [
         }
     },
     {
-        name: "Http Response",
+        label: "傳送 Response",
         nodeType: NodeType.HTTP_RESPONSE,
-        reactFlowNodeType: "output",
+        reactFlowNodeType: "result",
         payload: {
             statusCode: 200,
             responseData: `{"message":"ok!"}`,
         }
     },
     {
-        name: "Insert Row",
+        label: "插入一行資料",
         nodeType: NodeType.INSERT_ROW,
-        reactFlowNodeType: "default",
+        reactFlowNodeType: "process",
+        payload: {
+
+        }
+    },
+    {
+        label: "排程",
+        nodeType: NodeType.SCHEDULE,
+        reactFlowNodeType: "event",
         payload: {
 
         }
@@ -69,14 +77,15 @@ interface SideBarProps {
 
 export const SideBar: React.FC<SideBarProps> = ({ }) => {
     const { setCurrentDragElement } = useContext(FlowElementsContext)
-    const onDragStart = (event, ReactFlowNodeType, type, payload) => {
+    const onDragStart = (event, ReactFlowNodeType, label, type, payload) => {
+        console.log(label)
         const dragElement: FlowElement = {
             id: createNodeId(),
             type: ReactFlowNodeType,
             position: { x: 0, y: 0 },
             data: {
                 type,
-                label: `${type}`,
+                label: `${label}`,
                 payload
             }
         };
@@ -90,8 +99,8 @@ export const SideBar: React.FC<SideBarProps> = ({ }) => {
                 Nodes.map(node => {
                     console.log(node.payload)
                     return (
-                        <Button style={{ width: "100%", marginBottom: "1rem" }} onDragStart={(event) => onDragStart(event, node.reactFlowNodeType, node.nodeType, node.payload)} draggable>
-                            {node.name}
+                        <Button style={{ width: "100%", marginBottom: "1rem" }} onDragStart={(event) => onDragStart(event, node.reactFlowNodeType, node.label, node.nodeType, node.payload)} draggable>
+                            {node.label}
                         </Button>
                     )
                 })

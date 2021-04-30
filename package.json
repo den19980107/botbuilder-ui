@@ -19,6 +19,7 @@
     "axios": "^0.21.1",
     "botbuilder-share": "0.0.7",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-flow-renderer": "^9.4.0",

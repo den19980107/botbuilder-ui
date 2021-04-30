@@ -1,6 +1,6 @@
 import React from 'react'
 import { Constants } from 'botbuilder-share';
-import { Form, Input, Button, Select, message } from 'antd';
+import { Form, Input, Button, Select, message, Badge } from 'antd';
 import auth from '../../../../utils/auth';
 import { WebHookNodePayload } from 'botbuilder-share'
 const { HttpMethods } = Constants
@@ -67,5 +67,24 @@ export const WebhookFloatPannelLayout: React.FC<WebhookFloatPannelLayoutProps> =
                 </div>
             </Form.Item>
         </Form>
+    );
+}
+
+
+interface WebhookPreviewLayoutProps {
+    payload: WebHookNodePayload
+}
+
+export const WebhookPreviewLayout: React.FC<WebhookPreviewLayoutProps> = ({ payload }) => {
+    return (
+        <div>
+            {payload.method && payload.route &&
+                <div style={{ alignItems: "center", marginBottom: "0.5rem", display: "flex" }}>
+                    <Badge style={{ marginRight: "0.5rem", background: "#ffd95b" }} count={payload.method}></Badge>
+                    <span>{`/ ${auth.getCurrentUser().name} / ${payload.route}`}</span>
+                </div>
+            }
+
+        </div>
     );
 }

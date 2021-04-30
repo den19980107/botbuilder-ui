@@ -7,9 +7,14 @@ import { createEdgeId } from './util/createId';
 
 // import custom node
 import { ConditionNode } from './customNodes/conditionNode'
-
+import { EventNode } from './customNodes/eventNode'
+import { ProcessNode } from './customNodes/process'
+import { ResultNode } from './customNodes/resultNode'
 const nodeTypes = {
     condition: ConditionNode,
+    event: EventNode,
+    process: ProcessNode,
+    result: ResultNode
 };
 
 interface ReactFlowContainerProps {
@@ -116,7 +121,13 @@ export const ReactFlowContainer: React.FC<ReactFlowContainerProps> = ({ }) => {
                     <Controls />
                     <Background />
                     {currentSelectElement &&
-                        <FloatPanel visiable={showFloatPanel} nodeId={currentSelectElement.id} data={currentSelectElement.data.payload} type={currentSelectElement.data.type}></FloatPanel>
+                        <FloatPanel
+                            visiable={showFloatPanel}
+                            nodeId={currentSelectElement.id}
+                            data={currentSelectElement.data.payload}
+                            type={currentSelectElement.data.type}
+                            label={currentSelectElement.data.label}
+                        ></FloatPanel>
                     }
                 </ReactFlow>
             </div>

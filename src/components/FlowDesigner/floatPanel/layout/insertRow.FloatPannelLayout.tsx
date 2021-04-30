@@ -28,7 +28,7 @@ export const InsertRowFloatPannelLayout: React.FC<InsertRowFloatPannelLayoutProp
         return (
             <div>
                 <h1>選擇資料表</h1>
-                <Select style={{ width: 120 }} onChange={handleSelectTable} defaultValue={payload.tableId}>
+                <Select style={{ width: "100%", marginBottom: "1rem" }} onChange={handleSelectTable} defaultValue={payload.tableId}>
                     {data.map((table, idx) =>
                         <Option key={idx} value={table._id}>{table.name}</Option>
                     )}
@@ -65,7 +65,7 @@ export const DatabaseInsertForm: React.FC<DatabaseInsertFormInput> = ({ payload,
 
     if (data) {
         return (
-            <div style={{ marginTop: "1rem" }}>
+            <div >
                 <h1>請輸入欄位資料</h1>
                 <Form
                     onFinish={onFinish}
@@ -84,7 +84,6 @@ export const DatabaseInsertForm: React.FC<DatabaseInsertFormInput> = ({ payload,
                         )
                     })}
 
-
                     <Form.Item >
                         <div style={{ display: "flex", justifyContent: "space-between" }}>
                             <Button danger onClick={onDelete}>刪除</Button>
@@ -93,6 +92,7 @@ export const DatabaseInsertForm: React.FC<DatabaseInsertFormInput> = ({ payload,
                             </Button>
                         </div>
                     </Form.Item>
+
                 </Form>
             </div>
         );
