@@ -15,7 +15,7 @@ interface node {
 }
 const Nodes: node[] = [
     {
-        label: "判斷條件",
+        label: "🧑‍⚖️ 判斷條件",
         nodeType: NodeType.CONDITION,
         reactFlowNodeType: "condition",
         payload: {
@@ -23,7 +23,7 @@ const Nodes: node[] = [
         }
     },
     {
-        label: "建立 API",
+        label: "🛠 建立 API",
         nodeType: NodeType.WEB_HOOK,
         reactFlowNodeType: "event",
         payload: {
@@ -33,7 +33,7 @@ const Nodes: node[] = [
         }
     },
     {
-        label: "獲取資料",
+        label: "📁 呼叫 API",
         nodeType: NodeType.FETCH_DATA,
         reactFlowNodeType: "process",
         payload: {
@@ -45,7 +45,7 @@ const Nodes: node[] = [
         }
     },
     {
-        label: "傳送 Response",
+        label: "✅ 傳送 Response",
         nodeType: NodeType.HTTP_RESPONSE,
         reactFlowNodeType: "result",
         payload: {
@@ -54,7 +54,7 @@ const Nodes: node[] = [
         }
     },
     {
-        label: "插入一行資料",
+        label: "➕ 插入一行資料",
         nodeType: NodeType.INSERT_ROW,
         reactFlowNodeType: "process",
         payload: {
@@ -62,9 +62,25 @@ const Nodes: node[] = [
         }
     },
     {
-        label: "排程",
+        label: "📅 排程",
         nodeType: NodeType.SCHEDULE,
         reactFlowNodeType: "event",
+        payload: {
+
+        }
+    },
+    {
+        label: "新增變數",
+        nodeType: NodeType.DECLAR_VARIABLE,
+        reactFlowNodeType: "process",
+        payload: {
+
+        }
+    },
+    {
+        label: "重新導向",
+        nodeType: NodeType.REDIRECT,
+        reactFlowNodeType: "result",
         payload: {
 
         }

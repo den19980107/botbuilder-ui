@@ -9,7 +9,8 @@ import { HttpResponseFloatPannelLayout } from './layout/httpResponse.FloatPannel
 import { ConditionFloatPannelLayout } from './layout/condition.FloatPannelLayout'
 import { InsertRowFloatPannelLayout } from './layout/insertRow.FloatPannelLayout'
 import { ScheduleFloatPannelLayout } from './layout/schedule.FloatPannelLayout'
-
+import { DeclareVariableFloatPannelLayout } from './layout/declareVariable.FloatPannelLayout'
+import { RedirectFloatPannelLayout } from './layout/redirect.FloatPannelLayout'
 import { Edge, FlowElement, Node, removeElements } from 'react-flow-renderer'
 
 const { NodeType } = Constants
@@ -66,6 +67,11 @@ export const FloatPanel: React.FC<FloatPanelProps> = ({ visiable, data, type, no
             case NodeType.SCHEDULE:
                 return <ScheduleFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete}></ScheduleFloatPannelLayout>
                 break;
+            case NodeType.DECLAR_VARIABLE:
+                return <DeclareVariableFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete}></DeclareVariableFloatPannelLayout>
+                break;
+            case NodeType.REDIRECT:
+                return <RedirectFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete}></RedirectFloatPannelLayout>
         }
     }
 
