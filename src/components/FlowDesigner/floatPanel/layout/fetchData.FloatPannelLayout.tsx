@@ -1,4 +1,4 @@
-import { Button, Form, Input, Select } from 'antd';
+import { Button, Form, Input, Select, Checkbox } from 'antd';
 import React from 'react'
 import { Constants, FetchDataNodePayload } from 'botbuilder-share';
 const { HttpMethods } = Constants
@@ -14,6 +14,7 @@ interface FetchDataFloatPannelLayoutProps {
 export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
     console.log(payload)
     const onFinish = (payload: FetchDataNodePayload) => {
+        console.log(payload)
         onChange(payload)
     };
 
@@ -50,7 +51,14 @@ export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProp
             >
                 < TextArea />
             </Form.Item>
-
+            <Form.Item
+                label="使用表單來傳送"
+                name="postInForm"
+                valuePropName="checked"
+                initialValue={payload.postInForm}
+            >
+                < Checkbox />
+            </Form.Item>
             <Form.Item
                 label="header 內容"
                 name="headers"
