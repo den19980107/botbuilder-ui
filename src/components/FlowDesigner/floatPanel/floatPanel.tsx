@@ -10,6 +10,7 @@ import { ConditionFloatPannelLayout } from './layout/condition.FloatPannelLayout
 import { InsertRowFloatPannelLayout } from './layout/insertRow.FloatPannelLayout'
 import { ScheduleFloatPannelLayout } from './layout/schedule.FloatPannelLayout'
 
+import { Edge, FlowElement, Node, removeElements } from 'react-flow-renderer'
 
 const { NodeType } = Constants
 interface FloatPanelProps {
@@ -34,7 +35,15 @@ export const FloatPanel: React.FC<FloatPanelProps> = ({ visiable, data, type, no
     }
 
     const onDelete = () => {
-        setElements(elements.filter(el => el.id !== nodeId));
+        const elementToRemove = elements.filter(el => {
+            const edge: Edge = el as Edge;
+            const node: Node = el as Node;
+
+            if (edge.source === nodeId || edge.target === nodeId) return true
+            if (node.id === nodeId) return true;
+
+        });
+        setElements(removeElements(elementToRemove, elements));
         setCurrentSelectElement(null)
     }
     const switchLayout = (data) => {

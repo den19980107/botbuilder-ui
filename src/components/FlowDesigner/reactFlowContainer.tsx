@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react'
-import ReactFlow, { addEdge, ArrowHeadType, Background, Connection, Controls, Edge, Elements, FlowElement, MiniMap, Node, OnLoadParams, Position, removeElements } from 'react-flow-renderer';
+import ReactFlow, { addEdge, ArrowHeadType, Background, Connection, Controls, Edge, MiniMap, OnLoadParams, Position, updateEdge } from 'react-flow-renderer';
 import { FloatPanel } from './floatPanel';
 import { FlowElementsContext } from './flowElementsContext';
 import { SideBar } from './sideBar'
@@ -30,10 +30,6 @@ export const ReactFlowContainer: React.FC<ReactFlowContainerProps> = ({ }) => {
     const onLoad = (_reactFlowInstance: OnLoadParams) => {
         setReactFlowInstance(_reactFlowInstance);
     }
-    const onElementsRemove = (elementsToRemove) => {
-        // const setElements: (value: React.SetStateAction<Elements<any>>) => void
-        setElements(removeElements(elementsToRemove, elements));
-    }
     const onConnect = (params: Edge<any> | Connection) => {
         const edge = params as Edge<any>
         edge.animated = true;
@@ -58,6 +54,10 @@ export const ReactFlowContainer: React.FC<ReactFlowContainerProps> = ({ }) => {
             }
             return el;
         }))
+    }
+    const onEdgeUpdate = (oldEdge, newConnection) => {
+        console.log(oldEdge, newConnection)
+        setElements((els) => updateEdge(oldEdge, newConnection, els));
     }
     const onElementClick = (event, element) => {
         setShowFloatPanel(true)
@@ -107,10 +107,10 @@ export const ReactFlowContainer: React.FC<ReactFlowContainerProps> = ({ }) => {
                     elements={elements}
                     onElementClick={onElementClick}
                     onPaneClick={onReactFlowPannelClick}
-                    onElementsRemove={onElementsRemove}
                     onConnect={onConnect}
                     onNodeDragStop={onNodeDragStop}
                     onLoad={onLoad}
+                    onEdgeUpdate={onEdgeUpdate}
                     onDrop={onDrop}
                     onDragOver={onDragOver}
                     nodeTypes={nodeTypes}
