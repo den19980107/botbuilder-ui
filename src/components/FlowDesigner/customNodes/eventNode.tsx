@@ -13,7 +13,6 @@ interface EventNodeProps {
 
 export const EventNode: React.FC<EventNodeProps> = ({ data }) => {
     const NodeLabelName = data.label;
-    console.log(data)
     return (
         <>
             <div style={{ border: "0.5px solid #ccc", borderRadius: "5px", background: "#fff" }}>

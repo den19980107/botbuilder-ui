@@ -38,12 +38,12 @@ export const HttpResponseFloatPannelLayout: React.FC<HttpResponseFloatPannelLayo
 
 
             <Form.Item
-                label={`回傳資料，加上"#FLOW_SHARE_VARIABLE"可取用變數資料`}
+                label={`回傳資料，使用 \${some varaible} 可取用變數資料`}
                 name="responseData"
                 rules={[{ required: true, message: 'Please input webhook url!' }]}
                 initialValue={payload.responseData}
             >
-                <Input placeholder={`請輸入回傳資料，若要取用變數，在變數名稱前方加上 "#FLOW_SHARE_VARIABLE."`} />
+                <Input placeholder={`請輸入回傳資料，若要取用變數使用\${some varaible}"`} />
             </Form.Item>
 
             <Form.Item >

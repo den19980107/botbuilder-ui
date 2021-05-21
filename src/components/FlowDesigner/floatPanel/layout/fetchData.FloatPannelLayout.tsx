@@ -12,6 +12,7 @@ interface FetchDataFloatPannelLayoutProps {
 }
 
 export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
+    console.log(payload)
     const onFinish = (payload: FetchDataNodePayload) => {
         onChange(payload)
     };
@@ -52,7 +53,7 @@ export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProp
 
             <Form.Item
                 label="header 內容"
-                name="header"
+                name="headers"
                 initialValue={payload.headers}
             >
                 < TextArea />
