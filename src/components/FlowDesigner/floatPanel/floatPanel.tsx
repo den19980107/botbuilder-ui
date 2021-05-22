@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Constants } from 'botbuilder-share'
 import { FlowElementsContext } from '../flowElementsContext'
-import { message } from 'antd'
+import { Input, message } from 'antd'
 // layout
 import { WebhookFloatPannelLayout } from './layout/webhook.FloatPannelLayout'
 import { FetchDataFloatPannelLayout } from './layout/fetchData.FloatPannelLayout'
@@ -23,11 +23,13 @@ interface FloatPanelProps {
 }
 
 export const FloatPanel: React.FC<FloatPanelProps> = ({ visiable, data, type, nodeId, label }) => {
+    const [nodeLabel, setNodeLabel] = useState<string>(label);
     const { elements, setElements, setCurrentSelectElement } = useContext(FlowElementsContext)
     const onChange = (payload) => {
         setElements(elements.map(el => {
             if (el.id === nodeId) {
                 el.data.payload = payload;
+                el.data.label = nodeLabel;
             }
             return el
         }))
@@ -76,9 +78,14 @@ export const FloatPanel: React.FC<FloatPanelProps> = ({ visiable, data, type, no
     }
 
     return (
-        <div style={{ zIndex: 100, width: "500px", position: "absolute", left: 0, top: 0, padding: "1rem", background: "#fff", display: visiable ? "block" : "none", border: "0.5px solid #ccc", borderRadius: "1rem" }}>
-            <h1 style={{ marginBottom: "2rem" }}>{label} 設定</h1>
-            {switchLayout(data)}
+        <div style={{ zIndex: 100, width: "500px", position: "absolute", left: 0, top: 0, background: "#fff", display: visiable ? "block" : "none", border: "0.5px solid #ccc", borderRadius: "1rem" }}>
+            <div style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
+                <h1>節點名稱：</h1>
+                <Input size="large" value={nodeLabel} onChange={(e) => setNodeLabel(e.target.value)}></Input>
+            </div>
+            <div style={{ maxHeight: "60vh", overflow: "scroll", padding: "1rem" }}>
+                {switchLayout(data)}
+            </div>
         </div>
     );
 }
