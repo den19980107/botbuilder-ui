@@ -20,7 +20,7 @@ const SliderContainer: React.FC<SliderContainerProps> = ({ }) => {
                 </Menu.Item>
                 <Menu.Item icon={<RobotOutlined />} key="home">
                     <Link to="/">
-                        <span>機器人清單</span>
+                        <span>腳本清單</span>
                     </Link>
                 </Menu.Item>
                 <Menu.Item icon={<DatabaseOutlined />} key="database">

@@ -35,12 +35,7 @@ export const BotList: React.FC<BotListProps> = ({ bots }) => {
 
     const columns = [
         {
-            title: 'Id',
-            dataIndex: '_id',
-            key: '_id',
-        },
-        {
-            title: 'Name',
+            title: '名稱',
             dataIndex: 'name',
             key: 'name',
         },
