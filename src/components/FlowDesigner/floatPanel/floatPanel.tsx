@@ -52,28 +52,28 @@ export const FloatPanel: React.FC<FloatPanelProps> = ({ visiable, data, type, no
     const switchLayout = (data) => {
         switch (type) {
             case NodeType.WEB_HOOK:
-                return <WebhookFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete} />
+                return <WebhookFloatPannelLayout payload={data} nodeId={nodeId} onChange={onChange} onDelete={onDelete} />
                 break;
             case NodeType.FETCH_DATA:
-                return <FetchDataFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete} />
+                return <FetchDataFloatPannelLayout payload={data} nodeId={nodeId} onChange={onChange} onDelete={onDelete} />
                 break;
             case NodeType.HTTP_RESPONSE:
-                return <HttpResponseFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete} />
+                return <HttpResponseFloatPannelLayout payload={data} nodeId={nodeId} onChange={onChange} onDelete={onDelete} />
                 break;
             case NodeType.CONDITION:
-                return <ConditionFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete} />
+                return <ConditionFloatPannelLayout payload={data} nodeId={nodeId} onChange={onChange} onDelete={onDelete} />
                 break;
             case NodeType.INSERT_ROW:
-                return <InsertRowFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete}></InsertRowFloatPannelLayout>
+                return <InsertRowFloatPannelLayout payload={data} nodeId={nodeId} onChange={onChange} onDelete={onDelete}></InsertRowFloatPannelLayout>
                 break;
             case NodeType.SCHEDULE:
-                return <ScheduleFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete}></ScheduleFloatPannelLayout>
+                return <ScheduleFloatPannelLayout payload={data} nodeId={nodeId} onChange={onChange} onDelete={onDelete}></ScheduleFloatPannelLayout>
                 break;
             case NodeType.DECLAR_VARIABLE:
-                return <DeclareVariableFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete}></DeclareVariableFloatPannelLayout>
+                return <DeclareVariableFloatPannelLayout payload={data} nodeId={nodeId} onChange={onChange} onDelete={onDelete}></DeclareVariableFloatPannelLayout>
                 break;
             case NodeType.REDIRECT:
-                return <RedirectFloatPannelLayout payload={data} onChange={onChange} onDelete={onDelete}></RedirectFloatPannelLayout>
+                return <RedirectFloatPannelLayout payload={data} nodeId={nodeId} onChange={onChange} onDelete={onDelete}></RedirectFloatPannelLayout>
         }
     }
 

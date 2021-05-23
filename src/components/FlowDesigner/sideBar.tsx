@@ -11,6 +11,7 @@ interface node {
     label: string,
     nodeType: string,
     reactFlowNodeType: string,
+    needToRegister: string[],
     payload: any
 }
 const Nodes: node[] = [
@@ -18,45 +19,39 @@ const Nodes: node[] = [
         label: "🧑‍⚖️ 判斷條件",
         nodeType: NodeType.CONDITION,
         reactFlowNodeType: "condition",
+        needToRegister: [],
         payload: {
-            condition: "#FLOW_SHARE_VARIABLE.Something"
         }
     },
     {
         label: "🛠 建立 API",
         nodeType: NodeType.WEB_HOOK,
         reactFlowNodeType: "event",
+        needToRegister: ["storeBodyAt"],
         payload: {
-            route: "",
-            method: "GET",
-            storeBodyAt: "DATA"
         }
     },
     {
         label: "📁 呼叫 API",
         nodeType: NodeType.FETCH_DATA,
         reactFlowNodeType: "process",
+        needToRegister: ["storeDataAt"],
         payload: {
-            url: "",
-            method: "GET",
-            body: "",
-            header: "",
-            storeDataAt: "DATA"
         }
     },
     {
         label: "✅ 傳送 Response",
         nodeType: NodeType.HTTP_RESPONSE,
         reactFlowNodeType: "result",
+        needToRegister: [],
         payload: {
-            statusCode: 200,
-            responseData: `{"message":"ok!"}`,
         }
     },
     {
         label: "➕ 插入一行資料",
         nodeType: NodeType.INSERT_ROW,
         reactFlowNodeType: "process",
+        needToRegister: [],
         payload: {
 
         }
@@ -65,6 +60,7 @@ const Nodes: node[] = [
         label: "📅 排程",
         nodeType: NodeType.SCHEDULE,
         reactFlowNodeType: "event",
+        needToRegister: [],
         payload: {
 
         }
@@ -73,6 +69,7 @@ const Nodes: node[] = [
         label: "新增變數",
         nodeType: NodeType.DECLAR_VARIABLE,
         reactFlowNodeType: "process",
+        needToRegister: ["key"],
         payload: {
 
         }
@@ -81,6 +78,7 @@ const Nodes: node[] = [
         label: "重新導向",
         nodeType: NodeType.REDIRECT,
         reactFlowNodeType: "result",
+        needToRegister: [],
         payload: {
 
         }
@@ -93,7 +91,7 @@ interface SideBarProps {
 
 export const SideBar: React.FC<SideBarProps> = ({ }) => {
     const { setCurrentDragElement } = useContext(ScriptElementsContext)
-    const onDragStart = (event, ReactFlowNodeType, label, type, payload) => {
+    const onDragStart = (event, ReactFlowNodeType, label, type, payload, needToRegister) => {
         console.log(label)
         const dragElement: FlowElement = {
             id: createNodeId(),
@@ -102,7 +100,8 @@ export const SideBar: React.FC<SideBarProps> = ({ }) => {
             data: {
                 type,
                 label: `${label}`,
-                payload
+                payload,
+                needToRegister
             }
         };
         setCurrentDragElement(dragElement)
@@ -112,9 +111,9 @@ export const SideBar: React.FC<SideBarProps> = ({ }) => {
     return (
         <aside style={{ background: "rgb(247,247,247)", padding: "1rem", height: "100%" }}>
             {
-                Nodes.map(node => {
+                Nodes.map((node, idx) => {
                     return (
-                        <Button style={{ width: "100%", marginBottom: "1rem" }} onDragStart={(event) => onDragStart(event, node.reactFlowNodeType, node.label, node.nodeType, node.payload)} draggable>
+                        <Button key={idx} style={{ width: "100%", marginBottom: "1rem" }} onDragStart={(event) => onDragStart(event, node.reactFlowNodeType, node.label, node.nodeType, node.payload, node.needToRegister)} draggable>
                             {node.label}
                         </Button>
                     )

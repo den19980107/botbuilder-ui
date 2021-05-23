@@ -1,10 +1,11 @@
 import { message } from 'antd';
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useQueryClient } from 'react-query';
 import { useParams } from 'react-router';
 import { useBotData, useUpdateBot } from '../../api/bot';
 import queryKeys from '../../api/queryKeys';
 import { FlowDesigner } from '../../components/FlowDesigner';
+import { ScriptResourceContext } from '../../components/FlowDesigner/context/scriptResourceContext';
 import history from '../../history';
 
 interface ParamTypes {
@@ -18,6 +19,7 @@ interface UpdateBotPageProps {
 export const UpdateBotPage: React.FC<UpdateBotPageProps> = ({ }) => {
     const { id } = useParams<ParamTypes>();
     const { data, isLoading, error } = useBotData(id)
+    const { flowVariable } = useContext(ScriptResourceContext)
 
     const queryClient = useQueryClient();
     const updateBotMutation = useUpdateBot({
@@ -43,14 +45,18 @@ export const UpdateBotPage: React.FC<UpdateBotPageProps> = ({ }) => {
     if (data && data.nodes) {
         const nodes = JSON.parse(data.nodes)
         return (
-            <FlowDesigner initialbotname={data.name} initialElements={nodes} onSave={(name, elements) => {
-                console.log(name, elements)
-                updateBotMutation({
-                    name: name,
-                    nodes: JSON.stringify(elements),
-                    botId: id
-                })
-            }}></FlowDesigner>
+            <FlowDesigner
+                initialFlowVariable={flowVariable}
+                initialbotname={data.name}
+                initialElements={nodes}
+                onSave={(name, elements) => {
+                    updateBotMutation({
+                        name: name,
+                        nodes: JSON.stringify(elements),
+                        botId: id
+                    })
+                }}
+            ></FlowDesigner>
         )
     }
     return (

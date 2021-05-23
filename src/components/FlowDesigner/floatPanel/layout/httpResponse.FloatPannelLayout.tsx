@@ -1,16 +1,18 @@
 import { Button, Form, Input, Select } from 'antd';
 import React from 'react'
 import { HttpResponseNodePayload } from 'botbuilder-share'
+import { AutoCompleteWithScriptResource } from '../../components/autoCompleteWithScriptResource';
 const { Option } = Select
 
 
 interface HttpResponseFloatPannelLayoutProps {
     payload: HttpResponseNodePayload,
+    nodeId: string,
     onChange: (payload: HttpResponseNodePayload) => void,
     onDelete: () => void
 }
 
-export const HttpResponseFloatPannelLayout: React.FC<HttpResponseFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
+export const HttpResponseFloatPannelLayout: React.FC<HttpResponseFloatPannelLayoutProps> = ({ payload, nodeId, onChange, onDelete }) => {
     const onFinish = (payload: HttpResponseNodePayload) => {
         onChange(payload)
     };
@@ -38,12 +40,12 @@ export const HttpResponseFloatPannelLayout: React.FC<HttpResponseFloatPannelLayo
 
 
             <Form.Item
-                label={`回傳資料，使用 \${some varaible} 可取用變數資料`}
+                label={`回傳資料`}
                 name="responseData"
                 rules={[{ required: true, message: 'Please input webhook url!' }]}
                 initialValue={payload.responseData}
             >
-                <Input placeholder={`請輸入回傳資料，若要取用變數使用\${some varaible}"`} />
+                <AutoCompleteWithScriptResource placeholder="請輸入回傳資料"></AutoCompleteWithScriptResource>
             </Form.Item>
 
             <Form.Item >

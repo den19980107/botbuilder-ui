@@ -3,16 +3,19 @@ import { Constants } from 'botbuilder-share';
 import { Form, Input, Button, Select, message, Badge } from 'antd';
 import auth from '../../../../utils/auth';
 import { WebHookNodePayload } from 'botbuilder-share'
+import { DefindVariableInput } from '../../components/defindVariableInput';
 const { HttpMethods } = Constants
 const { Option } = Select;
 
 interface WebhookFloatPannelLayoutProps {
     payload: WebHookNodePayload,
+    nodeId: string,
     onChange: (payload: WebHookNodePayload) => void,
     onDelete: () => void
 }
 
-export const WebhookFloatPannelLayout: React.FC<WebhookFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
+
+export const WebhookFloatPannelLayout: React.FC<WebhookFloatPannelLayoutProps> = ({ payload, nodeId, onChange, onDelete }) => {
     const onFinish = (payload: WebHookNodePayload) => {
         onChange(payload)
     };
@@ -55,7 +58,7 @@ export const WebhookFloatPannelLayout: React.FC<WebhookFloatPannelLayoutProps> =
                 name="storeBodyAt"
                 initialValue={payload.storeBodyAt}
             >
-                <Input />
+                <DefindVariableInput nodeId={nodeId} type="flowVariable"></DefindVariableInput>
             </Form.Item>
 
             <Form.Item >

@@ -1,17 +1,22 @@
-import { Button, Form, Input, Select, Checkbox } from 'antd';
+import { Button, Form, Input, Select, Checkbox, AutoComplete } from 'antd';
 import React from 'react'
 import { Constants, FetchDataNodePayload } from 'botbuilder-share';
+import { AutoCompleteWithScriptResource } from '../../components/autoCompleteWithScriptResource';
+import { DefindVariableInput } from '../../components/defindVariableInput';
+import { v4 as uuid } from 'uuid'
 const { HttpMethods } = Constants
 const { Option } = Select
 const { TextArea } = Input;
 
+
 interface FetchDataFloatPannelLayoutProps {
     payload: FetchDataNodePayload,
+    nodeId: string,
     onChange: (payload: FetchDataNodePayload) => void,
     onDelete: () => void
 }
 
-export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
+export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProps> = ({ payload, nodeId, onChange, onDelete }) => {
     console.log(payload)
     const onFinish = (payload: FetchDataNodePayload) => {
         console.log(payload)
@@ -30,7 +35,7 @@ export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProp
                 rules={[{ required: true, message: 'Please input url!' }]}
                 initialValue={payload.url}
             >
-                <Input placeholder={`請輸入 url`} />
+                <AutoCompleteWithScriptResource placeholder="請輸入 url"></AutoCompleteWithScriptResource>
             </Form.Item>
 
             <Form.Item
@@ -49,7 +54,9 @@ export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProp
                 name="body"
                 initialValue={payload.body}
             >
-                < TextArea />
+                <AutoCompleteWithScriptResource>
+                    < TextArea />
+                </AutoCompleteWithScriptResource>
             </Form.Item>
             <Form.Item
                 label="使用表單來傳送"
@@ -64,7 +71,9 @@ export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProp
                 name="headers"
                 initialValue={payload.headers}
             >
-                < TextArea />
+                <AutoCompleteWithScriptResource>
+                    < TextArea />
+                </AutoCompleteWithScriptResource>
             </Form.Item>
 
             <Form.Item
@@ -72,7 +81,7 @@ export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProp
                 name="storeDataAt"
                 initialValue={payload.storeDataAt}
             >
-                <Input></Input>
+                <DefindVariableInput nodeId={nodeId} type="flowVariable"></DefindVariableInput>
             </Form.Item>
 
             <Form.Item >

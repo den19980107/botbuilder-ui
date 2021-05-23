@@ -2,17 +2,19 @@ import { Button, Form, Input, Select } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React from 'react'
 import { Constants, ConditionNodePayload } from 'botbuilder-share'
+import { AutoCompleteWithScriptResource } from '../../components/autoCompleteWithScriptResource';
 const { ConditionOperator } = Constants;
 const { Option } = Select
 
 
 interface ConditionFloatPannelLayoutProps {
     payload: ConditionNodePayload,
+    nodeId: string,
     onChange: (payload: ConditionNodePayload) => void,
     onDelete: () => void
 }
 
-export const ConditionFloatPannelLayout: React.FC<ConditionFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
+export const ConditionFloatPannelLayout: React.FC<ConditionFloatPannelLayoutProps> = ({ payload, nodeId, onChange, onDelete }) => {
     const onFinish = (payload: ConditionNodePayload) => {
         onChange(payload)
     };
@@ -29,7 +31,7 @@ export const ConditionFloatPannelLayout: React.FC<ConditionFloatPannelLayoutProp
                 rules={[{ required: true, message: 'Please input condition!' }]}
                 initialValue={payload.condition}
             >
-                <Input placeholder={`請輸入 condition`} />
+                <AutoCompleteWithScriptResource placeholder="請輸入 condition"></AutoCompleteWithScriptResource>
             </Form.Item>
 
             <Form.Item
@@ -50,8 +52,7 @@ export const ConditionFloatPannelLayout: React.FC<ConditionFloatPannelLayoutProp
                 rules={[{ required: true, message: 'Please input operant!' }]}
                 initialValue={payload.operant}
             >
-                <Input placeholder={`請輸入 operant`} />
-
+                <AutoCompleteWithScriptResource placeholder="請輸入 operant"></AutoCompleteWithScriptResource>
             </Form.Item>
 
             <Form.Item >

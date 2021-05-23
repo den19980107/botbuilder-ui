@@ -1,14 +1,19 @@
 import { Button, Form, Input } from 'antd';
 import { DeclarVariableNodePayload } from 'botbuilder-share';
+import { v4 as uuid } from 'uuid'
 import React from 'react'
+import { AutoCompleteWithScriptResource } from '../../components/autoCompleteWithScriptResource';
+import { DefindVariableInput } from '../../components/defindVariableInput';
 
 interface DeclareVariableFloatPannelLayoutProps {
     payload: DeclarVariableNodePayload,
+    nodeId: string,
     onChange: (payload: DeclarVariableNodePayload) => void,
     onDelete: () => void
 }
 
-export const DeclareVariableFloatPannelLayout: React.FC<DeclareVariableFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
+
+export const DeclareVariableFloatPannelLayout: React.FC<DeclareVariableFloatPannelLayoutProps> = ({ payload, nodeId, onChange, onDelete }) => {
     const onFinish = (payload: DeclarVariableNodePayload) => {
         onChange(payload)
     };
@@ -25,7 +30,7 @@ export const DeclareVariableFloatPannelLayout: React.FC<DeclareVariableFloatPann
                 rules={[{ required: true, message: 'Please input variable key!' }]}
                 initialValue={payload.key}
             >
-                <Input placeholder={`請輸入變數 key`} />
+                <DefindVariableInput nodeId={nodeId} type="flowVariable"></DefindVariableInput>
             </Form.Item>
 
             <Form.Item
@@ -34,7 +39,7 @@ export const DeclareVariableFloatPannelLayout: React.FC<DeclareVariableFloatPann
                 rules={[{ required: true, message: 'Please input variable value!' }]}
                 initialValue={payload.value}
             >
-                <Input placeholder={`請輸入變數 value`} />
+                <AutoCompleteWithScriptResource placeholder="請輸入變數 key"></AutoCompleteWithScriptResource>
             </Form.Item>
             <Form.Item >
                 <div style={{ display: "flex", justifyContent: "space-between" }}>

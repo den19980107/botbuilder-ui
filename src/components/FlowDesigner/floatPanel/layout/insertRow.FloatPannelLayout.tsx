@@ -2,18 +2,19 @@ import { Button, Form, Input, Select } from 'antd';
 import React, { useState } from 'react'
 import { useAllTableData, useColsDataByTableId } from '../../../../api/database';
 import { InsertRowNodePayload } from 'botbuilder-share'
+import { AutoCompleteWithScriptResource } from '../../components/autoCompleteWithScriptResource';
 const { Option } = Select;
 
 interface InsertRowFloatPannelLayoutProps {
     payload: InsertRowNodePayload,
+    nodeId: string,
     onChange: (payload: InsertRowNodePayload) => void,
     onDelete: () => void
 }
 
-export const InsertRowFloatPannelLayout: React.FC<InsertRowFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
+export const InsertRowFloatPannelLayout: React.FC<InsertRowFloatPannelLayoutProps> = ({ payload, nodeId, onChange, onDelete }) => {
     const { data, error, isLoading } = useAllTableData();
     const [selectedTableId, setSelectedTableId] = useState<string | null>(payload.tableId);
-    console.log("payload = ", payload)
     if (error) return <div>error...</div>
 
     if (isLoading) return <div>loding</div>
@@ -79,7 +80,7 @@ export const DatabaseInsertForm: React.FC<DatabaseInsertFormInput> = ({ payload,
                                 rules={[{ required: col.require, message: 'Please input your username!' }]}
                                 initialValue={payload.data && payload.data[col.name]}
                             >
-                                <Input />
+                                <AutoCompleteWithScriptResource ></AutoCompleteWithScriptResource>
                             </Form.Item>
                         )
                     })}

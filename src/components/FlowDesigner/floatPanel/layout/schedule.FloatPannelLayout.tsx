@@ -8,12 +8,12 @@ const CheckboxGroup = Checkbox.Group;
 
 interface ScheduleFloatPannelLayoutProps {
     payload: ScheduleNodePayload,
+    nodeId: string,
     onChange: (payload: ScheduleNodePayload) => void,
     onDelete: () => void
 }
 
-export const ScheduleFloatPannelLayout: React.FC<ScheduleFloatPannelLayoutProps> = ({ payload, onChange, onDelete }) => {
-    console.log(payload)
+export const ScheduleFloatPannelLayout: React.FC<ScheduleFloatPannelLayoutProps> = ({ payload, nodeId, onChange, onDelete }) => {
     const initialStartDate = payload.startDate ? moment(`${payload.startDate}`) : null
     const initialEndDate = payload.endDate ? moment(payload.endDate) : null
     const initialTime = (payload.hour && payload.minute) ? moment(`${payload.hour}:${payload.minute}`, "HH:mm") : null
