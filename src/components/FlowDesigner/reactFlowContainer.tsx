@@ -1,7 +1,7 @@
 import React, { useContext, useRef, useState } from 'react'
 import ReactFlow, { addEdge, ArrowHeadType, Background, Connection, Controls, Edge, MiniMap, OnLoadParams, Position, updateEdge } from 'react-flow-renderer';
 import { FloatPanel } from './floatPanel';
-import { FlowElementsContext } from './flowElementsContext';
+import { ScriptElementsContext } from './context/scriptElementsContext';
 import { SideBar } from './sideBar'
 import { createEdgeId } from './util/createId';
 
@@ -22,7 +22,7 @@ interface ReactFlowContainerProps {
 }
 
 export const ReactFlowContainer: React.FC<ReactFlowContainerProps> = ({ }) => {
-    const { elements, setElements, currentDragElement, setCurrentDragElement, currentSelectElement, setCurrentSelectElement } = useContext(FlowElementsContext)
+    const { elements, setElements, currentDragElement, setCurrentDragElement, currentSelectElement, setCurrentSelectElement } = useContext(ScriptElementsContext)
     const [showFloatPanel, setShowFloatPanel] = useState<boolean>(false);
     const reactFlowWrapper = useRef<HTMLDivElement>(null);
     const [reactFlowInstance, setReactFlowInstance] = useState<OnLoadParams | null>(null);

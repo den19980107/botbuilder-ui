@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Constants } from 'botbuilder-share'
-import { FlowElementsContext } from '../flowElementsContext'
+import { ScriptElementsContext } from '../context/scriptElementsContext'
 import { Input, message } from 'antd'
 // layout
 import { WebhookFloatPannelLayout } from './layout/webhook.FloatPannelLayout'
@@ -24,7 +24,7 @@ interface FloatPanelProps {
 
 export const FloatPanel: React.FC<FloatPanelProps> = ({ visiable, data, type, nodeId, label }) => {
     const [nodeLabel, setNodeLabel] = useState<string>(label);
-    const { elements, setElements, setCurrentSelectElement } = useContext(FlowElementsContext)
+    const { elements, setElements, setCurrentSelectElement } = useContext(ScriptElementsContext)
     const onChange = (payload) => {
         setElements(elements.map(el => {
             if (el.id === nodeId) {

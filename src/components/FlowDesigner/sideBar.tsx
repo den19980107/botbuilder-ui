@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Button } from 'antd';
 import { FlowElement } from 'react-flow-renderer';
-import { FlowElementsContext } from './flowElementsContext';
+import { ScriptElementsContext } from './context/scriptElementsContext';
 import { createNodeId } from './util/createId'
 
 import { Constants } from 'botbuilder-share'
@@ -92,7 +92,7 @@ interface SideBarProps {
 }
 
 export const SideBar: React.FC<SideBarProps> = ({ }) => {
-    const { setCurrentDragElement } = useContext(FlowElementsContext)
+    const { setCurrentDragElement } = useContext(ScriptElementsContext)
     const onDragStart = (event, ReactFlowNodeType, label, type, payload) => {
         console.log(label)
         const dragElement: FlowElement = {
@@ -113,7 +113,6 @@ export const SideBar: React.FC<SideBarProps> = ({ }) => {
         <aside style={{ background: "rgb(247,247,247)", padding: "1rem", height: "100%" }}>
             {
                 Nodes.map(node => {
-                    console.log(node.payload)
                     return (
                         <Button style={{ width: "100%", marginBottom: "1rem" }} onDragStart={(event) => onDragStart(event, node.reactFlowNodeType, node.label, node.nodeType, node.payload)} draggable>
                             {node.label}

@@ -1,7 +1,7 @@
 import { Button, Input } from "antd";
 import React, { useEffect, useState } from "react";
 import { Elements, Node, ReactFlowProvider } from "react-flow-renderer";
-import { FlowElementsContext } from "./flowElementsContext";
+import { ScriptElementsContext } from "./context/scriptElementsContext";
 import { ReactFlowContainer } from "./reactFlowContainer";
 
 interface FlowDesignerProps {
@@ -32,7 +32,7 @@ export const FlowDesigner: React.FC<FlowDesignerProps> = ({
 
     return (
         <ReactFlowProvider>
-            <FlowElementsContext.Provider
+            <ScriptElementsContext.Provider
                 value={{
                     elements,
                     setElements,
@@ -55,7 +55,7 @@ export const FlowDesigner: React.FC<FlowDesignerProps> = ({
                     >儲存</Button>
                 </div>
                 <ReactFlowContainer></ReactFlowContainer>
-            </FlowElementsContext.Provider>
+            </ScriptElementsContext.Provider>
         </ReactFlowProvider>
     );
 };

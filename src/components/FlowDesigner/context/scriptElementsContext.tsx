@@ -1,7 +1,7 @@
 import { createContext } from 'react'
 import { Elements, FlowElement, Node } from 'react-flow-renderer'
 
-interface flowElementContext {
+interface scriptElementContext {
     currentDragElement: Node | null,
     setCurrentDragElement: React.Dispatch<React.SetStateAction<Node | null>>,
     currentSelectElement: Node | null,
@@ -10,7 +10,7 @@ interface flowElementContext {
     setElements: React.Dispatch<React.SetStateAction<Elements<any>>>
 }
 
-export const FlowElementsContext = createContext<flowElementContext>({
+export const ScriptElementsContext = createContext<scriptElementContext>({
     currentDragElement: null,
     setCurrentDragElement: () => { },
     currentSelectElement: null,
