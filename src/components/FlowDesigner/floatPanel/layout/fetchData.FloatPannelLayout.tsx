@@ -35,7 +35,7 @@ export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProp
                 rules={[{ required: true, message: 'Please input url!' }]}
                 initialValue={payload.url}
             >
-                <AutoCompleteWithScriptResource placeholder="請輸入 url"></AutoCompleteWithScriptResource>
+                <AutoCompleteWithScriptResource nodeId={nodeId} placeholder="請輸入 url"></AutoCompleteWithScriptResource>
             </Form.Item>
 
             <Form.Item
@@ -54,7 +54,7 @@ export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProp
                 name="body"
                 initialValue={payload.body}
             >
-                <AutoCompleteWithScriptResource>
+                <AutoCompleteWithScriptResource nodeId={nodeId}>
                     < TextArea />
                 </AutoCompleteWithScriptResource>
             </Form.Item>
@@ -71,7 +71,7 @@ export const FetchDataFloatPannelLayout: React.FC<FetchDataFloatPannelLayoutProp
                 name="headers"
                 initialValue={payload.headers}
             >
-                <AutoCompleteWithScriptResource>
+                <AutoCompleteWithScriptResource nodeId={nodeId}>
                     < TextArea />
                 </AutoCompleteWithScriptResource>
             </Form.Item>

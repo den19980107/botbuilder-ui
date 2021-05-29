@@ -1,5 +1,5 @@
 import React, { createContext } from 'react'
-import { Elements, FlowElement, Node } from 'react-flow-renderer'
+import { Edge, Elements, isEdge } from 'react-flow-renderer'
 
 export interface Resource {
     value: string,
@@ -36,3 +36,21 @@ export const ScriptResourceContext = createContext<scriptResourceContext>({
     setTables: () => { },
     setScripts: () => { }
 })
+
+
+export const getFlowVariable = (nodeId: string, elements: Elements<any>, flowVariable: Array<Resource>): Resource[] => {
+    const edges = elements.filter(e => isEdge(e)) as Array<Edge>;
+    // 用來紀錄 一個 nodeId 的 上一個 nodeId 是誰
+    const map: { [key: string]: string } = {}
+    for (const edge of edges) {
+        map[edge.target] = edge.source;
+    }
+    let parentNodeId = map[nodeId];
+    let resource: Array<Resource> = [];
+    while (parentNodeId) {
+        const flowResource = flowVariable.filter(f => f.id === parentNodeId)[0];
+        if (flowResource) resource.push(flowResource);
+        parentNodeId = map[parentNodeId]
+    }
+    return resource;
+}

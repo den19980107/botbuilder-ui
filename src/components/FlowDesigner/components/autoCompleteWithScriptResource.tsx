@@ -1,8 +1,10 @@
 import { AutoComplete } from 'antd';
 import React, { useContext, useState } from 'react'
-import { ScriptResourceContext } from '../context/scriptResourceContext';
+import { ScriptElementsContext } from '../context/scriptElementsContext';
+import { ScriptResourceContext, getFlowVariable } from '../context/scriptResourceContext';
 
 interface AutoCompleteWithScriptResourceProps {
+    nodeId: string,
     placeholder?: string,
     value?: string,
     onChange?: Function
@@ -15,17 +17,18 @@ interface AutoCompleteWithScriptResourceProps {
  * form.item 中，form 會吃不到這個 component 的資料
  * ref: https://stackoverflow.com/questions/61793036/why-wont-custom-input-controls-validation-properly-in-ant-design-forms
  */
-export const AutoCompleteWithScriptResource: React.FC<AutoCompleteWithScriptResourceProps> = ({ placeholder, value = '', onChange, children }) => {
+export const AutoCompleteWithScriptResource: React.FC<AutoCompleteWithScriptResourceProps> = ({ nodeId, placeholder, value = '', onChange, children }) => {
     const [internalValue, setInternalValue] = useState(value);
     const [options, setOptions] = useState<any[]>([]);
     const { flowVariable, scriptVariable, routes, tables, scripts } = useContext(ScriptResourceContext);
+    const { elements } = useContext(ScriptElementsContext);
 
     const onSearch = (searchText: string) => {
         if (searchText.includes("#")) {
             setOptions([
                 {
                     label: "流程內變數",
-                    options: flowVariable
+                    options: getFlowVariable(nodeId, elements, flowVariable)
                 },
                 {
                     label: "全域變數",

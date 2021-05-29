@@ -34,7 +34,7 @@ export const InsertRowFloatPannelLayout: React.FC<InsertRowFloatPannelLayoutProp
                         <Option key={idx} value={table._id}>{table.name}</Option>
                     )}
                 </Select>
-                {selectedTableId && <DatabaseInsertForm tableId={selectedTableId} payload={payload} onChange={onChange} onDelete={onDelete} ></DatabaseInsertForm>}
+                {selectedTableId && <DatabaseInsertForm nodeId={nodeId} tableId={selectedTableId} payload={payload} onChange={onChange} onDelete={onDelete} ></DatabaseInsertForm>}
             </div>
         );
     }
@@ -44,13 +44,14 @@ export const InsertRowFloatPannelLayout: React.FC<InsertRowFloatPannelLayoutProp
 
 
 interface DatabaseInsertFormInput {
+    nodeId: string,
     tableId: string,
     payload: InsertRowNodePayload,
     onChange: (payload: InsertRowNodePayload) => void,
     onDelete: () => void
 }
 
-export const DatabaseInsertForm: React.FC<DatabaseInsertFormInput> = ({ payload, tableId, onChange, onDelete }) => {
+export const DatabaseInsertForm: React.FC<DatabaseInsertFormInput> = ({ nodeId, payload, tableId, onChange, onDelete }) => {
     const { data, isError, isLoading } = useColsDataByTableId(tableId);
 
     if (isError) return <div>error</div>
@@ -80,7 +81,7 @@ export const DatabaseInsertForm: React.FC<DatabaseInsertFormInput> = ({ payload,
                                 rules={[{ required: col.require, message: 'Please input your username!' }]}
                                 initialValue={payload.data && payload.data[col.name]}
                             >
-                                <AutoCompleteWithScriptResource ></AutoCompleteWithScriptResource>
+                                <AutoCompleteWithScriptResource nodeId={nodeId} ></AutoCompleteWithScriptResource>
                             </Form.Item>
                         )
                     })}

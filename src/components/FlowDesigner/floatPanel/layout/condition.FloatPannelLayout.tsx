@@ -31,7 +31,7 @@ export const ConditionFloatPannelLayout: React.FC<ConditionFloatPannelLayoutProp
                 rules={[{ required: true, message: 'Please input condition!' }]}
                 initialValue={payload.condition}
             >
-                <AutoCompleteWithScriptResource placeholder="請輸入 condition"></AutoCompleteWithScriptResource>
+                <AutoCompleteWithScriptResource nodeId={nodeId} placeholder="請輸入 condition"></AutoCompleteWithScriptResource>
             </Form.Item>
 
             <Form.Item
@@ -52,7 +52,7 @@ export const ConditionFloatPannelLayout: React.FC<ConditionFloatPannelLayoutProp
                 rules={[{ required: true, message: 'Please input operant!' }]}
                 initialValue={payload.operant}
             >
-                <AutoCompleteWithScriptResource placeholder="請輸入 operant"></AutoCompleteWithScriptResource>
+                <AutoCompleteWithScriptResource nodeId={nodeId} placeholder="請輸入 operant"></AutoCompleteWithScriptResource>
             </Form.Item>
 
             <Form.Item >

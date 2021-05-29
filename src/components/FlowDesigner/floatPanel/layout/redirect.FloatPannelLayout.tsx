@@ -27,7 +27,7 @@ export const RedirectFloatPannelLayout: React.FC<RedirectFloatPannelLayoutProps>
                 rules={[{ required: true, message: 'Please input redirect url!' }]}
                 initialValue={payload.url}
             >
-                <AutoCompleteWithScriptResource placeholder="請輸入重新導向 url"></AutoCompleteWithScriptResource>
+                <AutoCompleteWithScriptResource nodeId={nodeId} placeholder="請輸入重新導向 url"></AutoCompleteWithScriptResource>
             </Form.Item>
 
             <Form.Item >

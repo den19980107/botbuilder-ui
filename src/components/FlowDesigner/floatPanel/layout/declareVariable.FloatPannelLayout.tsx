@@ -39,7 +39,7 @@ export const DeclareVariableFloatPannelLayout: React.FC<DeclareVariableFloatPann
                 rules={[{ required: true, message: 'Please input variable value!' }]}
                 initialValue={payload.value}
             >
-                <AutoCompleteWithScriptResource placeholder="請輸入變數 key"></AutoCompleteWithScriptResource>
+                <AutoCompleteWithScriptResource nodeId={nodeId} placeholder="請輸入變數 key"></AutoCompleteWithScriptResource>
             </Form.Item>
             <Form.Item >
                 <div style={{ display: "flex", justifyContent: "space-between" }}>

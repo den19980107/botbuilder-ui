@@ -10,8 +10,8 @@ interface SliderContainerProps {
 
 const SliderContainer: React.FC<SliderContainerProps> = ({ }) => {
     return (
-        <Sider theme="light" collapsible>
-            <h1 style={{ padding: "1rem" }}>Logo</h1>
+        <Sider theme="light" >
+            <h1 style={{ padding: "1rem" }}>BotBuilder</h1>
             <Menu theme="light" mode="inline">
                 <Menu.Item icon={<PlusOutlined />} key="create">
                     <Link to="/bot/create">

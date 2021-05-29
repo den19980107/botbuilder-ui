@@ -45,7 +45,7 @@ export const HttpResponseFloatPannelLayout: React.FC<HttpResponseFloatPannelLayo
                 rules={[{ required: true, message: 'Please input webhook url!' }]}
                 initialValue={payload.responseData}
             >
-                <AutoCompleteWithScriptResource placeholder="請輸入回傳資料"></AutoCompleteWithScriptResource>
+                <AutoCompleteWithScriptResource nodeId={nodeId} placeholder="請輸入回傳資料"></AutoCompleteWithScriptResource>
             </Form.Item>
 
             <Form.Item >
