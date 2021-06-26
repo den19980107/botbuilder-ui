@@ -48,12 +48,14 @@ export const UpdateBotPage: React.FC<UpdateBotPageProps> = ({ }) => {
             <FlowDesigner
                 initialFlowVariable={flowVariable}
                 initialbotname={data.name}
+                initialIsMoudle={data.isMoudle}
                 initialElements={nodes}
-                onSave={(name, elements) => {
+                onSave={(name, elements, isMoudle) => {
                     updateBotMutation({
                         name: name,
                         nodes: JSON.stringify(elements),
-                        botId: id
+                        botId: id,
+                        isMoudle
                     })
                 }}
             ></FlowDesigner>

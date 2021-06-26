@@ -1,23 +1,26 @@
-import { Button, Input } from "antd";
+import { Button, Input, Switch } from "antd";
+import { NodeType } from "botbuilder-share/lib/constants";
 import React, { useEffect, useState } from "react";
-import { Elements, Node, ReactFlowProvider } from "react-flow-renderer";
+import { Elements, FlowElement, Node, ReactFlowProvider } from "react-flow-renderer";
 import { ScriptElementsContext } from "./context/scriptElementsContext";
 import { ScriptResourceContext, Resource } from "./context/scriptResourceContext";
 import { ReactFlowContainer } from "./reactFlowContainer";
 
 interface FlowDesignerProps {
     initialbotname?: string;
+    initialIsMoudle?: boolean;
     initialElements?: Elements<any>;
     initialFlowVariable?: Resource[];
     initialScriptVariable?: Resource[];
     initialRoutes?: Resource[];
     initialTables?: Resource[];
     initialScripts?: Resource[];
-    onSave: (name: string, elements: Elements<any>) => void;
+    onSave: (name: string, elements: Elements<any>, isMoudle: boolean) => void;
 }
 
 export const FlowDesigner: React.FC<FlowDesignerProps> = ({
     initialbotname,
+    initialIsMoudle = false,
     initialElements,
     initialFlowVariable,
     initialScriptVariable,
@@ -42,9 +45,54 @@ export const FlowDesigner: React.FC<FlowDesignerProps> = ({
     const [scripts, setScripts] = useState<Resource[]>(initialScripts || []);
     // end of script resource
 
+    const [isMoudle, setIsMoudle] = useState<boolean>(initialIsMoudle);
+
+    const startNodeId = "node_moudle_start";
+    const endNodeId = "node_moudle_end";
+
     useEffect(() => {
-        console.log(initialElements, initialbotname);
-    }, []);
+        if (isMoudle) {
+            addMoudleStartAndEndNode()
+        } else {
+            removeMoudleStartAndEndNode()
+        }
+    }, [isMoudle]);
+
+
+    const addMoudleStartAndEndNode = () => {
+        // 先檢查 element 中是否已經有 start node 和 end node
+        if (elements.find(e => e.id === startNodeId || e.id === endNodeId)) {
+            console.log("already have start and end node")
+            return
+        }
+        const startNode: FlowElement = {
+            id: startNodeId,
+            type: "moudleStart",
+            position: { x: 0, y: 200 },
+            data: {
+                type: NodeType.MOUDLE_START,
+                label: "Start",
+                payload: {},
+                needToRegister: []
+            }
+        };
+        const endNode: FlowElement = {
+            id: endNodeId,
+            type: "moudleEnd",
+            position: { x: 500, y: 200 },
+            data: {
+                type: NodeType.MOUDLE_END,
+                label: "End",
+                payload: {},
+                needToRegister: []
+            }
+        };
+        setElements([...elements, startNode, endNode])
+    }
+
+    const removeMoudleStartAndEndNode = () => {
+        setElements(elements.filter(e => e.id !== startNodeId && e.id !== endNodeId));
+    }
 
     return (
         <ReactFlowProvider>
@@ -80,9 +128,13 @@ export const FlowDesigner: React.FC<FlowDesignerProps> = ({
                         ></Input>
                         <Button
                             onClick={() => {
-                                onSave(botName, elements);
+                                onSave(botName, elements, isMoudle);
                             }}
                         >儲存</Button>
+                    </div>
+                    <div>
+                        <span>作為模組：</span>
+                        <Switch checked={isMoudle} onChange={(value) => { setIsMoudle(value) }} />
                     </div>
                     <ReactFlowContainer></ReactFlowContainer>
                 </ScriptResourceContext.Provider>

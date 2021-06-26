@@ -11,11 +11,17 @@ import { EventNode } from './customNodes/eventNode'
 import { ProcessNode } from './customNodes/process'
 import { ResultNode } from './customNodes/resultNode'
 import { UseScriptResourceRegister } from './util/useScriptResourceRegister';
+import { MoudleStartNode } from './customNodes/moudleStartNode';
+import { MoudleEndNode } from './customNodes/moudleEndNode';
+import { ScriptMoudleNode } from './customNodes/scriptMoudleNode';
 const nodeTypes = {
     condition: ConditionNode,
     event: EventNode,
     process: ProcessNode,
-    result: ResultNode
+    result: ResultNode,
+    moudleStart: MoudleStartNode,
+    moudleEnd: MoudleEndNode,
+    scriptMoudle: ScriptMoudleNode
 };
 
 interface ReactFlowContainerProps {

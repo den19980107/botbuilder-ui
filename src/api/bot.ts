@@ -14,7 +14,8 @@ const axiosConfig = {
 
 export interface CreateBotInput {
     name: string,
-    nodes: string
+    nodes: string,
+    isMoudle: boolean
 }
 
 const useCreateBot = (option: UseMutationOptions<any, AxiosError, CreateBotInput, unknown>): UseMutateFunction<any, AxiosError, CreateBotInput, unknown> => {
@@ -55,6 +56,7 @@ export interface UpdateBotInput {
     name: string,
     nodes: string,
     botId: string,
+    isMoudle: boolean
 }
 
 const useUpdateBot = (option: UseMutationOptions<any, AxiosError, UpdateBotInput, unknown>): UseMutateFunction<any, AxiosError, UpdateBotInput, unknown> => {

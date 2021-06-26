@@ -82,6 +82,16 @@ const Nodes: node[] = [
         payload: {
 
         }
+    },
+    {
+        label: "子腳本",
+        nodeType: NodeType.SCRIPT_MOUDLE,
+        reactFlowNodeType: "scriptMoudle",
+        needToRegister: [],
+        payload: {
+            scriptId: "60d5f842c20c582ffb4476a5",
+            scriptName: "moudle script"
+        }
     }
 ]
 

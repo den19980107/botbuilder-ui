@@ -21,10 +21,11 @@ export const CreateBotPage: React.FC<CreateBotPageProps> = ({ }) => {
         }
     })
     return (
-        <FlowDesigner initialFlowVariable={flowVariable} onSave={(name, elements) => {
+        <FlowDesigner initialFlowVariable={flowVariable} onSave={(name, elements, isMoudle) => {
             createBotMutation({
                 name: name,
-                nodes: JSON.stringify(elements)
+                nodes: JSON.stringify(elements),
+                isMoudle
             })
         }}></FlowDesigner>
     );
