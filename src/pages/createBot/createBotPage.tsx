@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { message } from 'antd';
 import { useQueryClient } from 'react-query';
-import { useCreateBot } from '../../api/bot';
+import { useCreateScript } from '../../api/script';
 import history from '../../history';
 import { FlowDesigner } from '../../components/FlowDesigner'
 import queryKeys from '../../api/queryKeys';
@@ -13,9 +13,9 @@ interface CreateBotPageProps {
 export const CreateBotPage: React.FC<CreateBotPageProps> = ({ }) => {
     const { flowVariable } = useContext(ScriptResourceContext)
     const queryClient = useQueryClient();
-    const createBotMutation = useCreateBot({
+    const createBotMutation = useCreateScript({
         onSuccess: () => {
-            queryClient.invalidateQueries(queryKeys.user.BOTS)
+            queryClient.invalidateQueries(queryKeys.user.SCRIPTS)
             message.success("新增成功！")
             history.push("/")
         }

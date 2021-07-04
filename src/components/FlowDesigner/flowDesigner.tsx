@@ -8,7 +8,7 @@ import { ReactFlowContainer } from "./reactFlowContainer";
 import { SideBar } from "./sideBar";
 
 interface FlowDesignerProps {
-    initialbotname?: string;
+    initialScriptName?: string;
     initialIsMoudle?: boolean;
     initialElements?: Elements<any>;
     initialFlowVariable?: Resource[];
@@ -20,7 +20,7 @@ interface FlowDesignerProps {
 }
 
 export const FlowDesigner: React.FC<FlowDesignerProps> = ({
-    initialbotname,
+    initialScriptName: initialbotname,
     initialIsMoudle = false,
     initialElements,
     initialFlowVariable,
@@ -129,6 +129,7 @@ export const FlowDesigner: React.FC<FlowDesignerProps> = ({
                                 <Form.Item
                                     label="腳本名稱"
                                     name="scriptName"
+                                    initialValue={initialbotname}
                                     rules={[{ required: true, message: '請輸入腳本名稱' }]}
                                 >
                                     <Input />
@@ -137,6 +138,7 @@ export const FlowDesigner: React.FC<FlowDesignerProps> = ({
                                 <Form.Item
                                     label="設為模組"
                                     name="isMoudle"
+                                    initialValue={initialIsMoudle}
                                     valuePropName="checked" >
                                     <Switch checked={isMoudle} onChange={(value) => { setIsMoudle(value) }} />
                                 </Form.Item>

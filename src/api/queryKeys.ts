@@ -1,8 +1,8 @@
 enum user {
-    BOTS = "BOTS"
+    SCRIPTS = "SCRIPTS"
 }
-enum bot {
-    BOT = "BOT"
+enum script {
+    SCRIPT = "SCRIPT"
 }
 enum table {
     TABLE = "TABLE",
@@ -10,4 +10,4 @@ enum table {
     VALUE = "VALUE"
 }
 
-export default { user, bot, table }
+export default { user, script, table }

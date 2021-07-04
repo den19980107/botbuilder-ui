@@ -1,4 +1,4 @@
-export default interface Bot {
+export default interface Script {
     isMoudle: boolean;
     id: string,
     name: string,

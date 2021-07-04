@@ -2,7 +2,7 @@ import { message } from 'antd';
 import React, { useContext, useEffect } from 'react'
 import { useQueryClient } from 'react-query';
 import { useParams } from 'react-router';
-import { useBotData, useUpdateBot } from '../../api/bot';
+import { useScriptData, useUpdateScript } from '../../api/script';
 import queryKeys from '../../api/queryKeys';
 import { FlowDesigner } from '../../components/FlowDesigner';
 import { ScriptResourceContext } from '../../components/FlowDesigner/context/scriptResourceContext';
@@ -18,14 +18,14 @@ interface UpdateBotPageProps {
 
 export const UpdateBotPage: React.FC<UpdateBotPageProps> = ({ }) => {
     const { id } = useParams<ParamTypes>();
-    const { data, isLoading, error } = useBotData(id)
+    const { data, isLoading, error } = useScriptData(id)
     const { flowVariable } = useContext(ScriptResourceContext)
 
     const queryClient = useQueryClient();
-    const updateBotMutation = useUpdateBot({
+    const updateBotMutation = useUpdateScript({
         onSuccess: () => {
-            queryClient.invalidateQueries(queryKeys.user.BOTS);
-            queryClient.invalidateQueries(queryKeys.bot.BOT)
+            queryClient.invalidateQueries(queryKeys.user.SCRIPTS);
+            queryClient.invalidateQueries(queryKeys.script.SCRIPT)
             message.success("更新成功！")
             history.push("/")
         }
@@ -36,7 +36,7 @@ export const UpdateBotPage: React.FC<UpdateBotPageProps> = ({ }) => {
      */
     useEffect(() => {
         return () => {
-            queryClient.removeQueries(queryKeys.bot.BOT);
+            queryClient.removeQueries(queryKeys.script.SCRIPT);
         }
     }, [])
 
@@ -47,14 +47,14 @@ export const UpdateBotPage: React.FC<UpdateBotPageProps> = ({ }) => {
         return (
             <FlowDesigner
                 initialFlowVariable={flowVariable}
-                initialbotname={data.name}
+                initialScriptName={data.name}
                 initialIsMoudle={data.isMoudle}
                 initialElements={nodes}
                 onSave={(name, elements, isMoudle) => {
                     updateBotMutation({
                         name: name,
                         nodes: JSON.stringify(elements),
-                        botId: id,
+                        scriptId: id,
                         isMoudle
                     })
                 }}

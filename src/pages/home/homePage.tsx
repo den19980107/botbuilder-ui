@@ -1,7 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 import React from 'react'
-import { useUserBots } from '../../api/user'
+import { useUserScripts } from '../../api/user'
 import { BotList } from '../../components/BotList'
 import history from '../../history'
 
@@ -10,7 +10,7 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ }) => {
-    const { data, isLoading, error } = useUserBots()
+    const { data, isLoading, error } = useUserScripts()
 
     if (isLoading) {
         return <div>loading...</div>

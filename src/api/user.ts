@@ -1,30 +1,30 @@
 import axios, { AxiosError } from "axios"
 import { useQuery, UseQueryOptions } from "react-query";
 import config from '../config/client.json'
-import Bot from "../types/bot";
+import Script from "../types/script";
 import auth from '../utils/auth';
 import queryKeys from "./queryKeys";
 
 
-const useUserBots = (options?: UseQueryOptions<Bot[], AxiosError>) => {
+const useUserScripts = (options?: UseQueryOptions<Script[], AxiosError>) => {
 
-    const getUsersBots = async (): Promise<Array<Bot>> => {
+    const getUsersScripts = async (): Promise<Array<Script>> => {
         const token = auth.getToken();
         const axiosConfig = {
             headers: { Authorization: "Bearer " + token }
         }
         try {
-            const { data } = await axios.get(`${config.API_URL}/user/bots`, axiosConfig);
-            return data.bots;
+            const { data } = await axios.get(`${config.API_URL}/user/scripts`, axiosConfig);
+            return data.scripts;
         } catch (error) {
             throw error
         }
     }
 
-    return useQuery<Bot[], AxiosError>(queryKeys.user.BOTS, getUsersBots, options)
+    return useQuery<Script[], AxiosError>(queryKeys.user.SCRIPTS, getUsersScripts, options)
 }
 
 
 export {
-    useUserBots
+    useUserScripts
 }
