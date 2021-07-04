@@ -22,7 +22,7 @@ export const HomePage: React.FC<HomePageProps> = ({ }) => {
 
     if (data) {
         return (
-            <div>
+            <div style={{ padding: "1rem" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1rem" }}>
                     <h1>腳本清單</h1>
                     <Button type="primary" icon={<PlusOutlined />} onClick={() => history.push("/bot/create")}>建立</Button>

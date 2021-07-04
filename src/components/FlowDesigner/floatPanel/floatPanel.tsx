@@ -78,7 +78,7 @@ export const FloatPanel: React.FC<FloatPanelProps> = ({ visiable, data, type, no
     }
 
     return (
-        <div style={{ zIndex: 100, width: "500px", position: "absolute", left: 0, top: 0, background: "#fff", display: visiable ? "block" : "none", border: "0.5px solid #ccc", borderRadius: "1rem" }}>
+        <div style={{ zIndex: 100, width: "500px", position: "absolute", left: "1rem", top: "1rem", background: "#fff", display: visiable ? "block" : "none", border: "0.5px solid #ccc", borderRadius: "1rem" }}>
             <div style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
                 <h1>節點名稱：</h1>
                 <Input size="large" value={nodeLabel} onChange={(e) => setNodeLabel(e.target.value)}></Input>

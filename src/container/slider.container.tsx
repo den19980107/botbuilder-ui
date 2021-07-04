@@ -2,6 +2,7 @@ import { RobotOutlined, AppstoreOutlined, DatabaseOutlined, PlusOutlined } from 
 import { Menu } from 'antd';
 import Sider from 'antd/lib/layout/Sider';
 import React from 'react'
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 interface SliderContainerProps {
@@ -9,23 +10,23 @@ interface SliderContainerProps {
 }
 
 const SliderContainer: React.FC<SliderContainerProps> = ({ }) => {
+    const [collapsed, setCollapsed] = useState(false)
     return (
-        <Sider theme="light" >
-            <h1 style={{ padding: "1rem" }}>BotBuilder</h1>
+        <Sider theme="light" collapsible collapsed={collapsed} onCollapse={(isCollapsible) => setCollapsed(isCollapsible)}>
             <Menu theme="light" mode="inline">
                 <Menu.Item icon={<PlusOutlined />} key="create">
-                    <Link to="/bot/create">
-                        <span>新增</span>
+                    <Link to="/bot/create" style={{ width: "1rem", margin: "auto" }}>
+                        {!collapsed && <span>新增</span>}
                     </Link>
                 </Menu.Item>
                 <Menu.Item icon={<RobotOutlined />} key="home">
                     <Link to="/">
-                        <span>腳本清單</span>
+                        {!collapsed && <span>腳本清單</span>}
                     </Link>
                 </Menu.Item>
                 <Menu.Item icon={<DatabaseOutlined />} key="database">
                     <Link to="/database">
-                        <span>資料表</span>
+                        {!collapsed && <span>資料表</span>}
                     </Link>
                 </Menu.Item>
             </Menu>

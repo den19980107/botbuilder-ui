@@ -57,8 +57,6 @@ export const BotList: React.FC<BotListProps> = ({ bots }) => {
         },
     ];
     return (
-        <div>
-            <Table dataSource={bots} columns={columns} rowKey="_id" />
-        </div>
+        <Table dataSource={bots} columns={columns} rowKey="_id" />
     );
 }

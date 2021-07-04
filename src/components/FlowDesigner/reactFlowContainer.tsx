@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef, useState } from 'react'
 import ReactFlow, { addEdge, ArrowHeadType, Background, Connection, Controls, Edge, isNode, MiniMap, OnLoadParams, Position, updateEdge } from 'react-flow-renderer';
 import { FloatPanel } from './floatPanel';
 import { ScriptElementsContext } from './context/scriptElementsContext';
-import { SideBar } from './sideBar'
 import { createEdgeId } from './util/createId';
 
 // import custom node
@@ -127,8 +126,8 @@ export const ReactFlowContainer: React.FC<ReactFlowContainerProps> = ({ }) => {
     };
 
     return (
-        <div style={{ display: "flex", position: "relative" }}>
-            <div className="reactflow-wrapper" ref={reactFlowWrapper} style={{ height: "75vh", flex: 11 }}>
+        <div style={{ display: "flex", position: "relative", height: "100%" }}>
+            <div className="reactflow-wrapper" ref={reactFlowWrapper} style={{ height: "100%", flex: 11 }}>
                 <ReactFlow
                     elements={elements}
                     onElementClick={onElementClick}
@@ -156,9 +155,6 @@ export const ReactFlowContainer: React.FC<ReactFlowContainerProps> = ({ }) => {
                         ></FloatPanel>
                     }
                 </ReactFlow>
-            </div>
-            <div style={{ flex: 1 }}>
-                <SideBar />
             </div>
         </div>
     );

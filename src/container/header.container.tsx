@@ -21,12 +21,13 @@ const HeaderContainer: React.FC<HeaderContainerProps> = ({ }) => {
     );
 
     return (
-        <Header style={{ background: "#fff", textAlign: "right" }}>
+        <Header style={{ background: "rgb(44,44,44)", textAlign: "right", color: "white" }}>
+            <div style={{ float: "left" }}>BotBuilder</div>
             <Popover content={content} title={`您好 ${user.name}`}>
                 <Avatar style={{ marginRight: "0.5rem" }} size={32} icon={<UserOutlined />} />
                 <span>{user.name}</span>
             </Popover>
-        </Header>
+        </Header >
     );
 }
 

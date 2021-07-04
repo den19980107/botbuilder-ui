@@ -1,10 +1,11 @@
-import { Button, Input, Switch } from "antd";
+import { Button, Form, Input, Switch } from "antd";
 import { NodeType } from "botbuilder-share/lib/constants";
 import React, { useEffect, useState } from "react";
 import { Elements, FlowElement, Node, ReactFlowProvider } from "react-flow-renderer";
 import { ScriptElementsContext } from "./context/scriptElementsContext";
 import { ScriptResourceContext, Resource } from "./context/scriptResourceContext";
 import { ReactFlowContainer } from "./reactFlowContainer";
+import { SideBar } from "./sideBar";
 
 interface FlowDesignerProps {
     initialbotname?: string;
@@ -29,8 +30,6 @@ export const FlowDesigner: React.FC<FlowDesignerProps> = ({
     initialScripts,
     onSave,
 }) => {
-    const [botName, setBotName] = useState<string>(initialbotname || "");
-
     // script elements
     const [elements, setElements] = useState<Elements<any>>(initialElements || []);
     const [currentDragElement, setCurrentDragElement] = useState<Node | null>(null);
@@ -120,23 +119,42 @@ export const FlowDesigner: React.FC<FlowDesignerProps> = ({
                         setScripts
                     }}
                 >
-                    <div style={{ display: "flex", marginBottom: "1rem" }}>
-                        <Input
-                            value={botName}
-                            onChange={(e) => setBotName(e.target.value)}
-                            placeholder="請輸入 bot 名稱"
-                        ></Input>
-                        <Button
-                            onClick={() => {
-                                onSave(botName, elements, isMoudle);
-                            }}
-                        >儲存</Button>
+                    <div style={{ display: "flex", height: "100%" }}>
+                        <div style={{ flex: 2, background: "rgb(247,247,247)", padding: "1rem" }}>
+                            <Form
+                                layout="vertical"
+                                initialValues={{ remember: true }}
+                                onFinish={(data) => onSave(data.scriptName, elements, data.isMoudle)}
+                            >
+                                <Form.Item
+                                    label="腳本名稱"
+                                    name="scriptName"
+                                    rules={[{ required: true, message: '請輸入腳本名稱' }]}
+                                >
+                                    <Input />
+                                </Form.Item>
+
+                                <Form.Item
+                                    label="設為模組"
+                                    name="isMoudle"
+                                    valuePropName="checked" >
+                                    <Switch checked={isMoudle} onChange={(value) => { setIsMoudle(value) }} />
+                                </Form.Item>
+
+                                <Form.Item >
+                                    <Button type="primary" htmlType="submit">
+                                        儲存
+                                    </Button>
+                                </Form.Item>
+                            </Form>
+                        </div>
+                        <div style={{ flex: 8 }}>
+                            <ReactFlowContainer></ReactFlowContainer>
+                        </div>
+                        <div style={{ flex: 2 }}>
+                            <SideBar></SideBar>
+                        </div>
                     </div>
-                    <div>
-                        <span>作為模組：</span>
-                        <Switch checked={isMoudle} onChange={(value) => { setIsMoudle(value) }} />
-                    </div>
-                    <ReactFlowContainer></ReactFlowContainer>
                 </ScriptResourceContext.Provider>
             </ScriptElementsContext.Provider>
         </ReactFlowProvider>
