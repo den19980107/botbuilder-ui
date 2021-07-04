@@ -67,7 +67,7 @@ const checkAuth = () => {
 
     try {
         const { exp } = decode<JWT_TOKEN>(token);
-        if (exp < new Date().getTime()) {
+        if (exp < new Date().getTime() / 1000) {
             console.error("token expire!")
             return false
         }

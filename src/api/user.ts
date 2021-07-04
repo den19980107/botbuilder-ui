@@ -5,15 +5,14 @@ import Bot from "../types/bot";
 import auth from '../utils/auth';
 import queryKeys from "./queryKeys";
 
-const token = auth.getToken();
-
-const axiosConfig = {
-    headers: { Authorization: "Bearer " + token }
-};
 
 const useUserBots = (options?: UseQueryOptions<Bot[], AxiosError>) => {
 
     const getUsersBots = async (): Promise<Array<Bot>> => {
+        const token = auth.getToken();
+        const axiosConfig = {
+            headers: { Authorization: "Bearer " + token }
+        }
         try {
             const { data } = await axios.get(`${config.API_URL}/user/bots`, axiosConfig);
             return data.bots;
