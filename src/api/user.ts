@@ -6,7 +6,7 @@ import auth from '../utils/auth';
 import queryKeys from "./queryKeys";
 
 
-const useUserScripts = (options?: UseQueryOptions<Script[], AxiosError>) => {
+const useUserScripts = (onlyScriptMoudle: boolean = false, options?: UseQueryOptions<Script[], AxiosError>) => {
 
     const getUsersScripts = async (): Promise<Array<Script>> => {
         const token = auth.getToken();
@@ -14,7 +14,9 @@ const useUserScripts = (options?: UseQueryOptions<Script[], AxiosError>) => {
             headers: { Authorization: "Bearer " + token }
         }
         try {
-            const { data } = await axios.get(`${config.API_URL}/user/scripts`, axiosConfig);
+            let url = `${config.API_URL}/user/scripts`;
+            if (onlyScriptMoudle) url += `?onlyScriptMoudle=${onlyScriptMoudle}`
+            const { data } = await axios.get(url, axiosConfig);
             return data.scripts;
         } catch (error) {
             throw error
