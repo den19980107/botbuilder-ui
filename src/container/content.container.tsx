@@ -8,7 +8,7 @@ interface ContentContainerProps {
 const ContentContainer: React.FC<ContentContainerProps> = ({ }) => {
     return (
         <Content>
-            <div style={{ background: "#fff", height: "91vh" }}>
+            <div style={{ background: "#fff", height: "100%" }}>
                 <ContentRouter></ContentRouter>
             </div>
         </Content>
