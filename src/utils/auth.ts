@@ -27,7 +27,7 @@ const login = (username, password) => {
         })
         .then((response) => {
             if (response.data.token) {
-                secureStroge.set("token", response.data.token);
+                secureStroge.set("botbuilder-token", response.data.token);
                 history.push("/")
             }
         })
@@ -38,18 +38,18 @@ const login = (username, password) => {
 };
 
 const logout = () => {
-    secureStroge.remove("token");
+    secureStroge.remove("botbuilder-token");
     history.push("/login")
 };
 
 const getCurrentUser = (): User => {
-    const token = secureStroge.get("token");
+    const token = secureStroge.get("botbuilder-token");
     const user = decode<JWT_TOKEN>(token);
     return user
 };
 
 const getToken = (): string => {
-    return secureStroge.get("token");
+    return secureStroge.get("botbuilder-token");
 }
 
 interface JWT_TOKEN {
@@ -59,7 +59,7 @@ interface JWT_TOKEN {
 }
 
 const checkAuth = () => {
-    const token = secureStroge.get("token");
+    const token = secureStroge.get("botbuilder-token");
     if (!token) {
         console.error("no token!")
         return false;
